@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Pajarera EcoHostal | Glamping & Cabañas</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config for Japandi Theme -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        japandi: {
+                            light: '#FBE4D2', /* Nuevo color de fondo cálido */
+                            base: '#F6E3D4', /* Logo Color */
+                            dark: '#151311', /* Logo Color (Mantiene los textos casi negros) */
+                            moss: '#556B52',
+                            ochre: '#C49755',
+                            indigo: '#2F3E46'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'slow-pan': 'pan 20s linear infinite alternate',
+                    },
+                    keyframes: {
+                        pan: {
+                            '0%': { transform: 'scale(1.05) translate(0, 0)' },
+                            '100%': { transform: 'scale(1.1) translate(-2%, -2%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom Styles & Utilities */
+        .glass-nav {
+            background-color: rgba(251, 228, 210, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 1px 3px rgba(21, 19, 17, 0.05);
+        }
+        
+        .fade-in {
+            transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Styling for Date Inputs */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            background: transparent;
+            bottom: 0;
+            color: transparent;
+            cursor: pointer;
+            height: auto;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: auto;
+        }
+        
+        /* Mobile Menu Transitions */
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hamburger-line {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform-origin: center;
+        }
+        .menu-open .line-1 { transform: translateY(8px) rotate(45deg); }
+        .menu-open .line-2 { opacity: 0; }
+        .menu-open .line-3 { transform: translateY(-8px) rotate(-45deg); }
+
+        @keyframes drawCircle {
+            0% { stroke-dashoffset: 301.59; }
+            100% { stroke-dashoffset: 0; }
+        }
+    </style>
+</head>
+<body class="bg-japandi-light text-japandi-dark font-sans antialiased overflow-x-hidden">
+
+    <div id="preloader" class="fixed inset-0 z-[100] flex items-center justify-center bg-japandi-dark transition-opacity duration-1000">
+        <!-- Imagen de fondo con efecto de paneo -->
+        <div class="absolute inset-0 overflow-hidden">
+            <img src="https://i.imgur.com/h1CpzAh.jpeg" alt="Loading Background" class="w-full h-full object-cover opacity-30 animate-slow-pan mix-blend-luminosity">
+        </div>
+        <!-- Capa superpuesta para oscurecer y dar elegancia -->
+        <div class="absolute inset-0 bg-gradient-to-b from-japandi-dark/90 via-japandi-dark/70 to-japandi-dark/90"></div>
+
+        <!-- Contenido Central -->
+        <div class="relative z-10 flex flex-col items-center">
+            
+            <!-- Contenedor del Anillo y Logo -->
+            <div class="relative w-24 h-24 md:w-28 md:h-28 flex items-center justify-center mb-8">
+                <!-- Anillo de carga SVG animado -->
+                <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
+                    <!-- Rastro sutil (anillo de fondo) -->
+                    <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"></circle>
+                    <!-- Línea de progreso (oro/ocre) -->
+                    <circle cx="50" cy="50" r="48" fill="none" stroke="#C49755" stroke-width="1.5" 
+                            stroke-dasharray="301.59" stroke-dashoffset="301.59" 
+                            class="animate-[drawCircle_2.8s_cubic-bezier(0.77,0,0.175,1)_forwards]"></circle>
+                </svg>
+                
+                <!-- Logo -->
+                <img src="https://i.imgur.com/okUBI6k.jpeg" alt="La Pajarera EcoHostal Logo" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-2xl">
+            </div>
+
+            <div class="flex flex-col items-center">
+                <span class="font-serif text-3xl md:text-4xl lg:text-5xl tracking-[0.2em] uppercase text-white drop-shadow-lg mb-2.5 transition-all duration-1000">La Pajarera</span>
+                <span class="font-sans text-[0.65rem] md:text-xs tracking-[0.4em] uppercase text-white/70 drop-shadow-sm transition-all duration-1000">&mdash; Eco Hostal &mdash;</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav id="navbar" class="fixed w-full z-50 top-0 transition-all duration-500 glass-nav -translate-y-full opacity-0 py-3 md:py-4 border-b border-japandi-dark/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <!-- Desktop Layout -->
+            <div class="hidden md:flex items-center justify-between w-full">
+                <!-- Links Izquierda -->
+                <div class="flex-1 flex justify-end items-center gap-10 lg:gap-14 pr-8 lg:pr-12">
+                    <a href="#ubicacion" class="nav-link text-[0.7rem] uppercase tracking-[0.2em] text-japandi-dark/70 hover:text-japandi-moss transition-colors font-medium">UBICACIÓN</a>
+                    <a href="#esencia" class="nav-link text-[0.7rem] uppercase tracking-[0.2em] text-japandi-dark/70 hover:text-japandi-moss transition-colors font-medium">GASTRONOMÍA</a>
+                </div>
+
+                <!-- Logo Central -->
+                <a href="#" class="flex flex-col items-center justify-center group flex-shrink-0">
+                    <img src="https://i.imgur.com/okUBI6k.jpeg" alt="La Pajarera EcoHostal Logo" class="w-10 h-10 lg:w-12 lg:h-12 rounded-full object-cover shadow-sm mb-2.5 group-hover:scale-105 transition-transform duration-300">
+                    <span id="nav-logo-text" class="font-serif text-xl lg:text-2xl tracking-[0.2em] uppercase text-japandi-dark transition-colors duration-500">LA PAJARERA</span>
+                    <span id="nav-logo-sub" class="font-sans text-[0.55rem] tracking-[0.3em] uppercase text-japandi-dark/60 mt-1.5 transition-colors duration-500">&mdash; ECOHOSTAL &mdash;</span>
+                </a>
+
+                <!-- Links Derecha -->
+                <div class="flex-1 flex justify-start items-center gap-10 lg:gap-14 pl-8 lg:pl-12">
+                    <a href="#santuarios" class="nav-link text-[0.7rem] uppercase tracking-[0.2em] text-japandi-dark/70 hover:text-japandi-moss transition-colors font-medium">REFUGIOS</a>
+                    <a href="#reserva" class="nav-link text-[0.65rem] uppercase tracking-[0.25em] text-japandi-ochre border border-japandi-ochre px-6 py-2.5 hover:bg-japandi-ochre hover:text-white transition-all duration-300 font-semibold rounded-sm">RESERVAR</a>
+                </div>
+            </div>
+
+            <!-- Mobile Layout -->
+            <div class="md:hidden flex justify-between items-center">
+                <button id="mobile-menu-btn" class="flex flex-col justify-between w-6 h-4 z-50 relative group">
+                    <span class="hamburger-line line-1 w-full h-[1.5px] bg-japandi-dark transition-colors duration-500"></span>
+                    <span class="hamburger-line line-2 w-full h-[1.5px] bg-japandi-dark transition-colors duration-500"></span>
+                    <span class="hamburger-line line-3 w-full h-[1.5px] bg-japandi-dark transition-colors duration-500"></span>
+                </button>
+                <a href="#" class="flex flex-col items-center group">
+                    <span class="font-serif text-lg tracking-[0.15em] uppercase text-japandi-dark">La Pajarera</span>
+                    <span class="font-sans text-[0.5rem] tracking-[0.25em] uppercase text-japandi-dark/60 mt-0.5">&mdash; EcoHostal &mdash;</span>
+                </a>
+                <div class="w-6"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overlay Menú Móvil -->
+    <div id="mobile-menu" class="fixed inset-0 bg-japandi-light z-40 translate-x-full flex flex-col justify-center items-center gap-8 px-6">
+        <a href="#ubicacion" class="mobile-link text-2xl font-serif text-japandi-dark uppercase tracking-widest">UBICACIÓN</a>
+        <a href="#esencia" class="mobile-link text-2xl font-serif text-japandi-dark uppercase tracking-widest">GASTRONOMÍA</a>
+        <a href="#santuarios" class="mobile-link text-2xl font-serif text-japandi-dark uppercase tracking-widest">REFUGIOS</a>
+        <a href="#reserva" class="mobile-link mt-6 px-10 py-3.5 border border-japandi-ochre text-japandi-ochre uppercase tracking-widest text-sm rounded-sm font-semibold hover:bg-japandi-ochre hover:text-white transition-all duration-300">RESERVAR</a>
+    </div>
+
+    <!-- BLOQUE 1: HERO SECTION -->
+    <header class="relative h-screen w-full overflow-hidden flex items-center justify-center">
+        <!-- Image Slideshow Container -->
+        <div id="hero-slideshow" class="absolute inset-0 z-0 bg-japandi-dark"></div>
+
+        <!-- Overlays for contrast -->
+        <div class="absolute inset-0 bg-[#3B4D3C]/60 mix-blend-multiply z-0 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-black/30 z-0 pointer-events-none"></div>
+
+        <!-- Slide Indicators -->
+        <div class="absolute top-2 md:top-3 left-1/2 -translate-x-1/2 z-20 flex gap-2" id="slide-indicators"></div>
+
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center fade-in opacity-0 translate-y-8 mt-12 md:mt-20">
+            <img src="https://i.imgur.com/okUBI6k.jpeg" alt="La Pajarera EcoHostal Logo" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-xl mb-8 border border-white/20">
+            <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl text-white mb-8 leading-[1.15] drop-shadow-sm">
+                Deja que la naturaleza<br><span class="italic font-light opacity-90">te envuelva</span>
+            </h1>
+            <p class="font-sans text-[0.65rem] md:text-xs uppercase tracking-[0.3em] text-white/80 font-medium">
+                Ecohostal <span class="mx-2 md:mx-3 text-white/30">&middot;</span> Avistamiento de aves <span class="mx-2 md:mx-3 text-white/30">&middot;</span> Reserva natural
+            </p>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-70 z-10">
+            <a href="#ubicacion" class="block animate-[bounce_2s_infinite]">
+                <i data-lucide="arrow-down" class="w-6 h-6 text-white stroke-[1.5]"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- BLOQUE 1.5: CÓMO LLEGAR -->
+    <section id="ubicacion" class="py-24 md:py-32 px-6 md:px-12 relative overflow-hidden bg-japandi-light">
+        <div class="absolute top-0 right-0 w-full lg:w-[55%] h-full bg-white/40 rounded-bl-[4rem] md:rounded-bl-[8rem] z-0"></div>
+        <div class="absolute inset-0 opacity-[0.06] z-0 pointer-events-none" style="background-image: radial-gradient(#556B52 1.5px, transparent 1.5px); background-size: 32px 32px;"></div>
+        <div class="hidden md:block absolute top-0 left-12 lg:left-24 w-[1px] h-32 bg-japandi-dark/10 z-0"></div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Text Column -->
+                <div class="fade-in opacity-0 translate-y-8">
+                    <span class="text-japandi-moss text-xs font-bold tracking-[0.2em] uppercase mb-4 block flex items-center gap-3">
+                        <span class="w-8 h-[1px] bg-japandi-moss inline-block"></span> Ubicación
+                    </span>
+                    <h2 class="font-serif text-3xl md:text-5xl text-japandi-dark mb-6 leading-tight">Cómo llegar al refugio</h2>
+                    <p class="font-sans text-lg text-japandi-dark/80 leading-relaxed mb-10 font-light">
+                        Nos encontramos en el emblemático Km 18 de la vía al mar (Cali - Buenaventura). A solo 45 minutos de la ciudad, sentirás cómo la temperatura desciende y la bruma del bosque te da la bienvenida.
+                        <br><br>
+                        El acceso es apto para cualquier tipo de vehículo. El viaje en carretera es el primer paso de tu proceso de desconexión.
+                    </p>
+                    
+                    <div class="w-full h-64 md:h-72 bg-white p-2 rounded-[2rem] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border border-japandi-dark/5 relative group z-20 transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)]">
+                        <div class="w-full h-full rounded-[1.5rem] overflow-hidden relative">
+                            <iframe 
+                                src="https://maps.google.com/maps?q=La+Pajarera+EcoHostal,+Valle+del+Cauca&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                class="transition-all duration-700 object-cover"
+                            ></iframe>
+                            <a href="https://maps.app.goo.gl/CWLZkdb8knnYL6W98" target="_blank" rel="noopener noreferrer" class="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-5 py-2.5 rounded-full text-[0.65rem] font-bold uppercase tracking-[0.15em] text-japandi-dark shadow-lg hover:bg-japandi-dark hover:text-white transition-all duration-300 flex items-center gap-2 hover:scale-105">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> Trazar Ruta
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Vertical -->
+                <div class="fade-in opacity-0 translate-y-8 flex justify-center lg:justify-end relative">
+                    <div class="absolute inset-0 bg-japandi-ochre/10 rounded-[2.5rem] blur-2xl transform translate-x-4 translate-y-4 -z-10 hidden lg:block"></div>
+                    <div class="relative w-full max-w-[320px] md:max-w-sm lg:max-w-md aspect-[9/16] rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-black/5 group">
+                        <video autoplay loop muted playsinline poster="https://i.imgur.com/PIVV1no.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+                            <source src="video0.mp4" type="video/mp4">
+                            <div class="w-full h-full bg-japandi-moss/50 flex items-center justify-center text-white p-6 text-center">Video no disponible</div>
+                        </video>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none opacity-80"></div>
+                        <div class="absolute bottom-8 left-8 right-8 text-white flex justify-between items-end pointer-events-none">
+                            <div>
+                                <p class="font-serif text-2xl md:text-3xl mb-2 drop-shadow-sm">Km 18, Vía al Mar</p>
+                                <p class="text-[0.65rem] uppercase tracking-[0.25em] text-white/80 font-semibold drop-shadow-sm">Valle del Cauca</p>
+                            </div>
+                            <div class="hidden sm:block">
+                                <div class="w-12 h-12 rounded-full border border-white/30 backdrop-blur-sm flex items-center justify-center">
+                                    <i data-lucide="map-pin" class="w-5 h-5 text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOQUE 2: ESENCIA (Gastronomía - Nivel Luxury) -->
+    <section id="esencia" class="py-32 px-6 md:px-12 relative overflow-hidden bg-[#F6E6D8] border-y border-japandi-dark/10 z-0">
+        
+        <!-- LUXURY BACKGROUND LAYERS -->
+        <!-- 1. Ambient Glows (Luces suaves para dar volumen) -->
+        <div class="absolute top-0 right-0 w-[40rem] h-[40rem] bg-white/60 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 -z-20 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-japandi-ochre/15 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/4 -z-20 pointer-events-none"></div>
+        
+        <!-- 2. Editorial Column Lines (Líneas verticales arquitectónicas elegantes) -->
+        <div class="absolute inset-0 opacity-[0.03] -z-10 pointer-events-none flex justify-evenly">
+            <div class="w-[1px] h-full bg-japandi-dark"></div>
+            <div class="w-[1px] h-full bg-japandi-dark"></div>
+            <div class="w-[1px] h-full bg-japandi-dark"></div>
+            <div class="w-[1px] h-full bg-japandi-dark hidden md:block"></div>
+        </div>
+        
+        <!-- 3. Zen Geometric Accent (Círculo minimalista) -->
+        <div class="absolute top-1/2 right-[-20%] md:right-[5%] -translate-y-1/2 w-[35rem] h-[35rem] md:w-[50rem] md:h-[50rem] border-[0.5px] border-japandi-dark/10 rounded-full pointer-events-none -z-10"></div>
+        <div class="absolute top-1/2 right-[-20%] md:right-[5%] -translate-y-1/2 w-[34rem] h-[34rem] md:w-[49rem] md:h-[49rem] border-[0.5px] border-japandi-ochre/10 rounded-full pointer-events-none -z-10"></div>
+        
+        <!-- 4. Elegant Vertical Typography (Tipografía profesional y sutil) -->
+        <div class="absolute top-1/2 left-0 md:left-8 -translate-y-1/2 pointer-events-none -z-10 opacity-[0.03] select-none transform -rotate-90 origin-center hidden xl:block">
+            <span class="font-sans text-5xl font-light text-japandi-dark whitespace-nowrap tracking-[0.4em] uppercase">Gastronomía Consciente</span>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10 flex flex-col lg:flex-row items-center gap-16 lg:gap-24 relative mt-4">
+            
+            <!-- Columna Izquierda (Ahora Video): Composición Visual (Arco Japandi) -->
+            <div class="w-full lg:w-7/12 fade-in opacity-0 translate-y-8 order-1 lg:order-1 relative flex justify-center lg:justify-start">
+                
+                <!-- Bloque Premium: Glassmorphism Frost Effect -->
+                <div class="absolute w-full max-w-[340px] md:max-w-md aspect-[3/4] md:aspect-[4/5] bg-gradient-to-br from-white/70 to-white/10 backdrop-blur-lg border border-white/50 rounded-t-full rounded-b-[3rem] -z-10 transform -translate-x-4 md:-translate-x-8 translate-y-4 md:translate-y-8 shadow-[0_20px_40px_rgba(0,0,0,0.05)]"></div>
+                
+                <!-- Contenedor Principal en forma de arco -->
+                <div class="relative w-full max-w-[340px] md:max-w-md aspect-[3/4] md:aspect-[4/5] rounded-t-full rounded-b-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] border-[6px] border-white group">
+                    
+                    <video 
+                        autoplay 
+                        loop 
+                        muted 
+                        playsinline 
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                    >
+                        <source src="video1.mp4" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                    
+                    <!-- Degradado sutil para asegurar contraste -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-japandi-dark/60 via-transparent to-transparent pointer-events-none opacity-80"></div>
+                    
+                    <!-- Sello Circular Animado (Badge) Ultra Premium -->
+                    <div class="absolute bottom-6 right-6 md:bottom-10 md:right-10 w-24 h-24 md:w-28 md:h-28 bg-white/95 backdrop-blur-md border border-japandi-dark/5 rounded-full shadow-2xl flex items-center justify-center z-10 transition-transform duration-500 group-hover:rotate-12">
+                        <!-- Texto curvo giratorio -->
+                        <svg viewBox="0 0 100 100" class="absolute inset-0 w-full h-full text-japandi-dark animate-[spin_20s_linear_infinite]">
+                            <path id="textPathCocina" d="M 50, 50 m -32, 0 a 32,32 0 1,1 64,0 a 32,32 0 1,1 -64,0" fill="none"></path>
+                            <text class="text-[0.6rem] uppercase tracking-[0.25em] font-semibold">
+                                <textPath href="#textPathCocina" startOffset="0%">· SLOW FOOD · EXPERIENCIA</textPath>
+                            </text>
+                        </svg>
+                        <!-- Icono central estático -->
+                        <div class="w-10 h-10 rounded-full border border-japandi-ochre/30 flex items-center justify-center bg-japandi-ochre/10 text-japandi-ochre">
+                            <i data-lucide="utensils" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Columna Derecha: Contenido Textual -->
+            <div class="w-full lg:w-5/12 fade-in opacity-0 translate-y-8 order-2 lg:order-2 relative">
+                <!-- Detalle tipográfico vertical (separador más alto y elegante) -->
+                <div class="hidden lg:block absolute -left-12 top-[-2rem] bottom-[-2rem] w-[1px] bg-gradient-to-b from-transparent via-japandi-dark/20 to-transparent"></div>
+                
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="w-12 h-[1px] bg-japandi-ochre"></span>
+                    <span class="text-japandi-ochre text-xs font-bold tracking-[0.25em] uppercase">Nuestra Cocina</span>
+                </div>
+                
+                <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-japandi-dark mb-8 leading-[1.1] drop-shadow-sm">
+                    Gastronomía <br>
+                    <span class="italic font-light text-japandi-moss/90">con consciencia.</span>
+                </h2>
+                
+                <p class="font-sans text-lg text-japandi-dark/70 leading-relaxed mb-10 font-light">
+                    Deleita tus sentidos con una comida honesta y deliciosa en el corazón de San Antonio. Un refugio donde el tiempo se detiene para que disfrutes del avistamiento de aves, el susurro del viento y la magia innegable de los árboles. 
+                    <br><br>
+                    Un espacio diseñado para reconectar con lo esencial a través de los sabores de la tierra. Bienvenidos todos.
+                </p>
+                
+                <a href="#" id="menu-whatsapp-btn" class="group inline-flex items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-japandi-dark hover:text-japandi-moss transition-colors duration-300">
+                    <span class="border-b border-japandi-dark group-hover:border-japandi-moss pb-1 transition-colors duration-300">Descubrir el menú</span>
+                    <div class="w-10 h-10 rounded-full border border-japandi-dark/20 flex items-center justify-center group-hover:border-japandi-moss group-hover:bg-japandi-moss group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-md">
+                        <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BLOQUE 3: EL MECANISMO (La Experiencia) -->
+    <section id="mecanismo" class="py-32 px-6 md:px-12 relative overflow-hidden bg-japandi-light z-0 border-t border-japandi-dark/5">
+        
+        <!-- LUXURY BACKGROUND LAYERS: EL RITUAL -->
+        <!-- 1. Zen Garden Concentric Rings (Líneas sutiles arquitectónicas) -->
+        <div class="absolute top-0 right-0 w-[40rem] h-[40rem] border border-japandi-dark/10 rounded-full -translate-y-1/2 translate-x-1/3 -z-20 pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-[55rem] h-[55rem] border border-japandi-dark/5 rounded-full -translate-y-1/2 translate-x-1/3 -z-20 pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-[70rem] h-[70rem] border border-japandi-dark/5 rounded-full -translate-y-1/2 translate-x-1/3 -z-20 pointer-events-none"></div>
+        
+        <!-- 2. Organic Glows (Luces suaves para calidez) -->
+        <div class="absolute bottom-0 left-0 w-[45rem] h-[45rem] bg-japandi-moss/5 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 -z-20 pointer-events-none"></div>
+        <div class="absolute top-1/2 right-0 w-[30rem] h-[30rem] bg-japandi-ochre/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/4 -z-20 pointer-events-none"></div>
+        
+        <!-- 3. Geometric Abstract Shape (Simulando paneles) -->
+        <div class="absolute bottom-20 right-10 w-64 h-64 border-[0.5px] border-japandi-dark/10 rotate-45 -z-20 pointer-events-none hidden md:block"></div>
+        <div class="absolute bottom-20 right-10 w-64 h-64 border-[0.5px] border-japandi-dark/10 rotate-[25deg] -z-20 pointer-events-none hidden md:block"></div>
+        
+        <!-- 4. Tipografía Fantasma -->
+        <div class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-[10%] pointer-events-none -z-10 opacity-[0.015] select-none mix-blend-multiply origin-center -rotate-90 hidden xl:block">
+            <span class="font-serif text-[15rem] leading-none text-japandi-dark whitespace-nowrap tracking-[0.2em] uppercase">TIEMPO</span>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 fade-in opacity-0 translate-y-8">
+                <div class="max-w-2xl">
+                    <span class="text-japandi-moss text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">Proceso de reserva</span>
+                    <h2 class="font-serif text-4xl md:text-5xl text-japandi-dark leading-tight">Cómo reservar tu refugio</h2>
+                </div>
+                <div class="hidden md:block pb-2">
+                    <p class="font-sans text-sm text-japandi-dark/50 max-w-xs text-right font-light">
+                        Tres simples pasos para asegurar tu pausa en el bosque de niebla.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center relative">
+                
+                <!-- Columna Izquierda: Los Pasos -->
+                <div class="w-full lg:w-7/12 flex flex-col gap-12 md:gap-16">
+                    <div class="group relative fade-in opacity-0 translate-y-8" style="transition-delay: 100ms;">
+                        <div class="border-t border-japandi-dark/20 pt-8 transition-colors duration-500 group-hover:border-japandi-ochre flex flex-col md:flex-row md:gap-8">
+                            <span class="font-serif text-5xl text-japandi-dark/10 block mb-4 md:mb-0 md:w-20 transition-colors duration-500 group-hover:text-japandi-ochre">01.</span>
+                            <div>
+                                <h3 class="font-serif text-2xl text-japandi-dark mb-4">Selección</h3>
+                                <p class="text-sm text-japandi-dark/70 leading-relaxed font-light">
+                                    Dirígete a nuestra sección de reservas en la parte inferior. Elige las fechas deseadas para tu estadía y selecciona la cabaña que mejor se adapte a la experiencia que buscas.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group relative fade-in opacity-0 translate-y-8" style="transition-delay: 200ms;">
+                        <div class="border-t border-japandi-dark/20 pt-8 transition-colors duration-500 group-hover:border-japandi-moss flex flex-col md:flex-row md:gap-8">
+                            <span class="font-serif text-5xl text-japandi-dark/10 block mb-4 md:mb-0 md:w-20 transition-colors duration-500 group-hover:text-japandi-moss">02.</span>
+                            <div>
+                                <h3 class="font-serif text-2xl text-japandi-dark mb-4">Contacto Directo</h3>
+                                <p class="text-sm text-japandi-dark/70 leading-relaxed font-light">
+                                    Al verificar disponibilidad, serás redirigido a nuestro WhatsApp. Allí, nuestro equipo te confirmará los espacios y te compartirá las opciones para realizar el abono inicial (50%).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group relative fade-in opacity-0 translate-y-8" style="transition-delay: 300ms;">
+                        <div class="border-t border-japandi-dark/20 pt-8 transition-colors duration-500 group-hover:border-japandi-indigo flex flex-col md:flex-row md:gap-8">
+                            <span class="font-serif text-5xl text-japandi-dark/10 block mb-4 md:mb-0 md:w-20 transition-colors duration-500 group-hover:text-japandi-indigo">03.</span>
+                            <div>
+                                <h3 class="font-serif text-2xl text-japandi-dark mb-4">Confirmación</h3>
+                                <p class="text-sm text-japandi-dark/70 leading-relaxed font-light">
+                                    Tras validar tu comprobante de pago, te enviaremos la confirmación oficial de tu reserva junto con un documento detallado con todas las indicaciones y recomendaciones para tu llegada.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Video Vertical -->
+                <div class="w-full lg:w-5/12 flex justify-center lg:justify-end relative fade-in opacity-0 translate-y-8" style="transition-delay: 400ms;">
+                    
+                    <!-- Cristal esmerilado detrás del video (Efecto de profundidad Premium) -->
+                    <div class="absolute w-full max-w-[300px] md:max-w-[340px] aspect-[9/16] bg-gradient-to-br from-japandi-moss/10 to-white/20 backdrop-blur-md rounded-[2.5rem] -z-10 transform translate-x-4 translate-y-4 md:translate-x-8 md:translate-y-8 border border-white/50 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)]"></div>
+                    
+                    <div id="ritual-video-container" class="relative w-full max-w-[300px] md:max-w-[340px] aspect-[9/16] rounded-[2rem] overflow-hidden shadow-2xl border-[6px] border-white group cursor-pointer">
+                        <!-- Video de Restauración (Fixed tags) -->
+                        <video id="ritual-video" autoplay loop muted playsinline poster="https://i.imgur.com/KNAsXEA.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105">
+                            <source src="video2.mp4" type="video/mp4">
+                        </video>
+                        <div class="absolute inset-0 bg-gradient-to-t from-japandi-dark/60 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                        <div class="absolute bottom-6 right-6 z-20">
+                            <div class="bg-white/95 backdrop-blur-md px-4 py-2 rounded-full border border-japandi-dark/5 shadow-lg flex items-center gap-2 transition-transform duration-300 group-hover:scale-105">
+                                <span id="ritual-video-text" class="text-[0.6rem] uppercase tracking-[0.2em] text-japandi-dark font-semibold">El Silencio</span>
+                                <i id="ritual-video-icon" data-lucide="volume-x" class="w-3.5 h-3.5 text-japandi-dark/60"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOQUE 5: OFERTA (Santuarios) -->
+    <section id="santuarios" class="py-24 md:py-32 px-6 md:px-12 relative overflow-hidden bg-[#F2DFCE] z-0 border-y border-japandi-dark/5">
+        
+        <!-- LUXURY BACKGROUND LAYERS: REFUGIOS -->
+        <!-- 1. Ambient Glows (Luces suaves para volumen) -->
+        <div class="absolute top-0 right-0 w-[40rem] h-[40rem] bg-white/60 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 -z-20 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[45rem] h-[45rem] bg-japandi-moss/10 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4 -z-20 pointer-events-none"></div>
+        
+        <!-- 2. Subtle Texture (Puntos sutiles) -->
+        <div class="absolute inset-0 opacity-[0.03] -z-10 pointer-events-none" style="background-image: radial-gradient(#151311 1.5px, transparent 1.5px); background-size: 48px 48px;"></div>
+        
+        <!-- 3. Architectural Shapes (Arcos y Marcos) -->
+        <div class="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] border-[0.5px] border-japandi-dark/10 rounded-full -z-10 pointer-events-none hidden lg:block"></div>
+        <div class="absolute bottom-[-15%] right-[-5%] w-[400px] h-[700px] border-[0.5px] border-japandi-dark/10 rounded-t-full -z-10 pointer-events-none hidden lg:block rotate-12"></div>
+        <div class="absolute top-6 left-6 right-6 bottom-6 border border-japandi-dark/5 pointer-events-none -z-10 hidden md:block rounded-3xl"></div>
+        
+        <!-- 4. Watermark Typography -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-20 w-full overflow-hidden flex justify-center opacity-[0.015] select-none mix-blend-multiply">
+            <span class="font-serif text-[10rem] md:text-[18rem] lg:text-[24rem] leading-none text-japandi-dark whitespace-nowrap tracking-tighter">CABAÑAS</span>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16 md:mb-20 fade-in opacity-0 translate-y-8">
+                <span class="text-japandi-moss text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">Refugios</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-japandi-dark">Nuestras cabañas</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <!-- Cabaña A -->
+                <div class="bg-white/80 backdrop-blur-md rounded-[2rem] overflow-hidden shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border border-white transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12)] hover:-translate-y-1 fade-in opacity-0 translate-y-8">
+                    <!-- Carousel Container -->
+                    <div class="h-64 md:h-72 relative cabin-carousel-container group bg-japandi-dark">
+                        <!-- Items: 5 Images -->
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-100 z-10">
+                            <img src="https://i.imgur.com/8qZjnn0.jpeg" alt="Interior Cabaña A 1" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+                            <img src="https://i.imgur.com/8ogBTLk.jpeg" alt="Interior Cabaña A 2" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+                            <img src="https://i.imgur.com/A8oSEfb.jpeg" alt="Interior Cabaña A 3" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+                            <img src="https://i.imgur.com/zDJctAG.jpeg" alt="Interior Cabaña A 4" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+                            <img src="https://i.imgur.com/63GKipn.jpeg" alt="Interior Cabaña A 5" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        
+                        <!-- Dots Container -->
+                        <div class="dots-container absolute bottom-4 left-0 right-0 z-20 flex justify-center gap-1.5 items-center"></div>
+                        
+                        <!-- Gradient overlay for dot visibility -->
+                        <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/60 to-transparent pointer-events-none z-10"></div>
+                    </div>
+                    <div class="p-8 md:p-10">
+                        <div class="flex justify-between items-end mb-5">
+                            <h3 class="font-serif text-2xl md:text-3xl text-japandi-dark">Cabaña A</h3>
+                            <div class="text-right">
+                                <span class="block text-xl md:text-2xl text-japandi-dark font-medium">$380k<span class="text-sm text-japandi-dark/50 font-normal">/noche</span></span>
+                                <span class="text-[0.65rem] uppercase tracking-wider text-japandi-moss font-semibold">LUN - JUE</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-japandi-dark/70 mb-8 h-10 font-light leading-relaxed">Con jacuzzi privado y vistas espectaculares para una inmersión completa.</p>
+                        <ul class="space-y-4 mb-10 text-sm text-japandi-dark/80 font-light">
+                            <li class="flex items-center gap-3"><i data-lucide="coffee" class="w-4 h-4 text-japandi-ochre"></i> Desayuno incluido</li>
+                            <li class="flex items-center gap-3"><i data-lucide="wine" class="w-4 h-4 text-japandi-ochre"></i> Vino, ron o aguardiente de cortesía</li>
+                            <li class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-japandi-dark/40"></i> In: 3PM / Out: 12PM</li>
+                            <li class="flex items-center gap-3"><i data-lucide="ban" class="w-4 h-4 text-japandi-dark/40"></i> No se admiten mascotas</li>
+                        </ul>
+                        <a href="#reserva" onclick="selectCabin('A')" class="block w-full py-3.5 text-center border border-japandi-dark text-japandi-dark text-[0.7rem] font-semibold uppercase tracking-widest hover:bg-japandi-dark hover:text-white transition-colors duration-300 rounded-full">Seleccionar Fechas</a>
+                    </div>
+                </div>
+
+                <!-- Cabaña B -->
+                <div class="bg-white/80 backdrop-blur-md rounded-[2rem] overflow-hidden shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border border-white transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12)] hover:-translate-y-1 fade-in opacity-0 translate-y-8" style="transition-delay: 200ms;">
+                    <!-- Carousel Container -->
+                    <div class="h-64 md:h-72 relative cabin-carousel-container group bg-japandi-dark">
+                        <!-- Items: 5 Images -->
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-100 z-10">
+                            <img src="https://i.imgur.com/aluWbO4.jpeg" alt="Interior Cabaña B 1" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+                            <img src="https://i.imgur.com/S2KAzSa.jpeg" alt="Interior Cabaña B 2" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+                            <img src="https://i.imgur.com/fNbucbp.jpeg" alt="Interior Cabaña B 3" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+                            <img src="https://i.imgur.com/ZkDCO7K.jpeg" alt="Interior Cabaña B 4" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+                            <img src="https://i.imgur.com/6oWJRYf.jpeg" alt="Interior Cabaña B 5" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        
+                        <!-- Dots Container -->
+                        <div class="dots-container absolute bottom-4 left-0 right-0 z-20 flex justify-center gap-1.5 items-center"></div>
+                        
+                        <!-- Gradient overlay for dot visibility -->
+                        <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/60 to-transparent pointer-events-none z-10"></div>
+                    </div>
+                    <div class="p-8 md:p-10">
+                        <div class="flex justify-between items-end mb-5">
+                            <h3 class="font-serif text-2xl md:text-3xl text-japandi-dark">Cabaña B</h3>
+                            <div class="text-right">
+                                <span class="block text-xl md:text-2xl text-japandi-dark font-medium">$380k<span class="text-sm text-japandi-dark/50 font-normal">/noche</span></span>
+                                <span class="text-[0.65rem] uppercase tracking-wider text-japandi-moss font-semibold">LUN - JUE</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-japandi-dark/70 mb-8 h-10 font-light leading-relaxed">Diseño cálido y ventanales inmersivos para amaneceres inolvidables.</p>
+                        <ul class="space-y-4 mb-10 text-sm text-japandi-dark/80 font-light">
+                            <li class="flex items-center gap-3"><i data-lucide="coffee" class="w-4 h-4 text-japandi-ochre"></i> Desayuno incluido</li>
+                            <li class="flex items-center gap-3"><i data-lucide="wine" class="w-4 h-4 text-japandi-ochre"></i> Vino, ron o aguardiente de cortesía</li>
+                            <li class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-japandi-dark/40"></i> In: 3PM / Out: 12PM</li>
+                            <li class="flex items-center gap-3"><i data-lucide="ban" class="w-4 h-4 text-japandi-dark/40"></i> No se admiten mascotas</li>
+                        </ul>
+                        <a href="#reserva" onclick="selectCabin('B')" class="block w-full py-3.5 text-center border border-japandi-dark text-japandi-dark text-[0.7rem] font-semibold uppercase tracking-widest hover:bg-japandi-dark hover:text-white transition-colors duration-300 rounded-full">Seleccionar Fechas</a>
+                    </div>
+                </div>
+
+                <!-- Cabaña C -->
+                <div class="bg-white/80 backdrop-blur-md rounded-[2rem] overflow-hidden shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border border-white transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12)] hover:-translate-y-1 fade-in opacity-0 translate-y-8" style="transition-delay: 400ms;">
+                    <!-- Carousel Container -->
+                    <div class="h-64 md:h-72 relative cabin-carousel-container group bg-japandi-dark">
+                        <!-- Items: 5 Images -->
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-100 z-10">
+                            <img src="https://i.imgur.com/2jndyMm.jpeg" alt="Interior Cabaña C 1" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+                            <img src="https://i.imgur.com/241THg8.jpeg" alt="Interior Cabaña C 2" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+                            <img src="https://i.imgur.com/SNtj0Il.jpeg" alt="Interior Cabaña C 3" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+                            <img src="https://i.imgur.com/S6TS5N3.jpeg" alt="Interior Cabaña C 4" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+                            <img src="https://i.imgur.com/H9kIC0F.jpeg" alt="Interior Cabaña C 5" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
+                        </div>
+                        
+                        <!-- Dots Container -->
+                        <div class="dots-container absolute bottom-4 left-0 right-0 z-20 flex justify-center gap-1.5 items-center"></div>
+                        
+                        <!-- Gradient overlay for dot visibility -->
+                        <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/60 to-transparent pointer-events-none z-10"></div>
+                    </div>
+                    <div class="p-8 md:p-10">
+                        <div class="flex justify-between items-end mb-5">
+                            <h3 class="font-serif text-2xl md:text-3xl text-japandi-dark">Cabaña C</h3>
+                            <div class="text-right">
+                                <span class="block text-xl md:text-2xl text-japandi-dark font-medium">$380k<span class="text-sm text-japandi-dark/50 font-normal">/noche</span></span>
+                                <span class="text-[0.65rem] uppercase tracking-wider text-japandi-moss font-semibold">LUN - JUE</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-japandi-dark/70 mb-8 h-10 font-light leading-relaxed">Silencio profundo y lujo esencial en medio del bosque nuboso.</p>
+                        <ul class="space-y-4 mb-10 text-sm text-japandi-dark/80 font-light">
+                            <li class="flex items-center gap-3"><i data-lucide="coffee" class="w-4 h-4 text-japandi-ochre"></i> Desayuno incluido</li>
+                            <li class="flex items-center gap-3"><i data-lucide="wine" class="w-4 h-4 text-japandi-ochre"></i> Vino, ron o aguardiente de cortesía</li>
+                            <li class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-japandi-dark/40"></i> In: 3PM / Out: 12PM</li>
+                            <li class="flex items-center gap-3"><i data-lucide="ban" class="w-4 h-4 text-japandi-dark/40"></i> No se admiten mascotas</li>
+                        </ul>
+                        <a href="#reserva" onclick="selectCabin('C')" class="block w-full py-3.5 text-center border border-japandi-dark text-japandi-dark text-[0.7rem] font-semibold uppercase tracking-widest hover:bg-japandi-dark hover:text-white transition-colors duration-300 rounded-full">Seleccionar Fechas</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Nota Fines de semana -->
+            <div class="mt-16 max-w-2xl mx-auto bg-white/60 backdrop-blur-md border border-white shadow-xl rounded-[2rem] p-8 md:p-10 text-center fade-in opacity-0 translate-y-8 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none -skew-x-12 translate-x-[-100%] group-hover:animate-[shimmer_2s_infinite]"></div>
+                <p class="text-japandi-dark font-serif text-xl md:text-2xl mb-2 relative z-10">Tarifa Fines de Semana y Festivos: <span class="text-japandi-moss font-semibold">$520.000 <span class="text-sm font-sans font-normal text-japandi-dark/60">/noche</span></span></p>
+                <p class="text-sm text-japandi-dark/60 font-light relative z-10">Aplica para Viernes, Sábado, Domingo y días Festivos.</p>
+                <p class="text-[0.65rem] text-japandi-dark/40 mt-4 uppercase tracking-widest font-semibold relative z-10">* Precios indicados son por noche y por pareja.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOQUE 4: PRUEBA SOCIAL -->
+    <section id="voces" class="py-32 px-6 md:px-12 relative overflow-hidden bg-[#F6E3D4]/30 z-0">
+        
+        <!-- LUXURY BACKGROUND LAYERS: VOCES -->
+        <!-- 1. Ambient Glows (Luces suaves para volumen) -->
+        <div class="absolute top-0 left-0 w-[40rem] h-[40rem] bg-white/60 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/4 -z-20 pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-[35rem] h-[35rem] bg-japandi-moss/5 rounded-full blur-[90px] translate-y-1/3 translate-x-1/4 -z-20 pointer-events-none"></div>
+        
+        <!-- 2. Subtle Texture (Cuadrícula arquitectónica sutil) -->
+        <div class="absolute inset-0 opacity-[0.02] -z-10 pointer-events-none" style="background-image: linear-gradient(to right, #151311 1px, transparent 1px), linear-gradient(to bottom, #151311 1px, transparent 1px); background-size: 4rem 4rem;"></div>
+        
+        <!-- 3. Architectural Framing Lines -->
+        <div class="absolute top-6 left-6 right-6 bottom-6 border border-japandi-dark/5 pointer-events-none -z-10 hidden md:block rounded-3xl"></div>
+        
+        <!-- 4. Giant Watermark Typography -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10 w-full overflow-hidden flex justify-center opacity-[0.015] select-none mix-blend-multiply">
+            <span class="font-serif text-[10rem] md:text-[18rem] lg:text-[24rem] leading-none text-japandi-dark whitespace-nowrap tracking-tighter">VOCES</span>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <!-- Header Section -->
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-20 fade-in opacity-0 translate-y-8 gap-8">
+                <div class="max-w-2xl">
+                    <span class="text-japandi-moss text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">Experiencias</span>
+                    <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-japandi-dark mb-4 leading-tight">Lo que dicen quienes <br><span class="italic font-light text-japandi-moss/90">han pausado aquí</span></h2>
+                </div>
+                <div class="flex flex-col lg:items-end gap-2 pb-2">
+                    <div class="flex items-center gap-4">
+                        <span class="text-5xl font-serif text-japandi-dark">4.9</span>
+                        <div class="flex flex-col">
+                            <div class="flex text-japandi-ochre gap-1 mb-1">
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                            <span class="text-[0.65rem] uppercase tracking-[0.15em] text-japandi-dark/50 font-semibold">142 Reseñas en Google</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Tarjeta 1 -->
+                <div class="bg-white/70 backdrop-blur-lg p-10 rounded-[2.5rem] border border-white shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] fade-in opacity-0 translate-y-8 relative group hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col justify-between">
+                    <!-- Comilla decorativa -->
+                    <span class="absolute top-6 right-8 font-serif text-8xl text-japandi-dark/5 group-hover:text-japandi-ochre/10 transition-colors duration-500 leading-none select-none">“</span>
+                    
+                    <div>
+                        <div class="flex items-center gap-4 mb-8 relative z-10">
+                            <div class="w-12 h-12 rounded-full bg-japandi-moss/10 text-japandi-moss flex items-center justify-center font-serif text-xl border border-japandi-moss/20">J</div>
+                            <div>
+                                <p class="font-medium text-sm text-japandi-dark">Jose Guarnizo</p>
+                                <p class="text-xs text-japandi-dark/50 font-light">12 reseñas</p>
+                            </div>
+                        </div>
+                        <div class="flex text-japandi-ochre gap-1 mb-6 relative z-10">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                        </div>
+                        <p class="font-serif italic text-japandi-dark/80 text-lg leading-relaxed mb-8 relative z-10">"Espectacular, después de todo el estrés de mi trabajo, tuve la oportunidad de dejarlo todo atrás durante unos días y conectarme con la naturaleza, mi pareja y conmigo mismo. Vale la pena."</p>
+                    </div>
+                    
+                    <div class="border-t border-japandi-dark/10 pt-5 relative z-10">
+                        <p class="text-[0.65rem] text-japandi-dark/40 uppercase tracking-[0.2em] font-semibold">Hace 1 año en Google</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2 -->
+                <div class="bg-white/70 backdrop-blur-lg p-10 rounded-[2.5rem] border border-white shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] fade-in opacity-0 translate-y-8 relative group hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col justify-between" style="transition-delay: 100ms;">
+                    <span class="absolute top-6 right-8 font-serif text-8xl text-japandi-dark/5 group-hover:text-[#8C7A6B]/10 transition-colors duration-500 leading-none select-none">“</span>
+                    
+                    <div>
+                        <div class="flex items-center gap-4 mb-8 relative z-10">
+                            <div class="w-12 h-12 rounded-full bg-[#8C7A6B]/10 text-[#8C7A6B] flex items-center justify-center font-serif text-xl border border-[#8C7A6B]/20">S</div>
+                            <div>
+                                <p class="font-medium text-sm text-japandi-dark">sandra vasquez</p>
+                                <p class="text-xs text-japandi-dark/50 font-light">3 reseñas</p>
+                            </div>
+                        </div>
+                        <div class="flex text-japandi-ochre gap-1 mb-6 relative z-10">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                        </div>
+                        <p class="font-serif italic text-japandi-dark/80 text-lg leading-relaxed mb-8 relative z-10">"Necesitaba tanto este escape de la ciudad que valió la pena! Desde que llegué quedé totalmente enamorada del lugar. Super recomendadisimo!!!"</p>
+                    </div>
+                    
+                    <div class="border-t border-japandi-dark/10 pt-5 relative z-10">
+                        <p class="text-[0.65rem] text-japandi-dark/40 uppercase tracking-[0.2em] font-semibold">Hace 1 año en Google</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 3 -->
+                <div class="bg-white/70 backdrop-blur-lg p-10 rounded-[2.5rem] border border-white shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] fade-in opacity-0 translate-y-8 relative group hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col justify-between" style="transition-delay: 200ms;">
+                    <span class="absolute top-6 right-8 font-serif text-8xl text-japandi-dark/5 group-hover:text-japandi-ochre/10 transition-colors duration-500 leading-none select-none">“</span>
+                    
+                    <div>
+                        <div class="flex items-center gap-4 mb-8 relative z-10">
+                            <div class="w-12 h-12 rounded-full bg-japandi-ochre/10 text-japandi-ochre flex items-center justify-center font-serif text-xl border border-japandi-ochre/20">J</div>
+                            <div>
+                                <p class="font-medium text-sm text-japandi-dark">Juan David Pineda</p>
+                                <p class="text-xs text-japandi-dark/50 font-light">2 reseñas</p>
+                            </div>
+                        </div>
+                        <div class="flex text-japandi-ochre gap-1 mb-6 relative z-10">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                        </div>
+                        <p class="font-serif italic text-japandi-dark/80 text-lg leading-relaxed mb-8 relative z-10">"El lugar es maravilloso, perfecto para descansar y disfrutar de la naturaleza, la amabilidad y hospitalidad del personal es increíble."</p>
+                    </div>
+                    
+                    <div class="border-t border-japandi-dark/10 pt-5 relative z-10">
+                        <p class="text-[0.65rem] text-japandi-dark/40 uppercase tracking-[0.2em] font-semibold">Hace 9 meses en Google</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 4 -->
+                <div class="bg-white/70 backdrop-blur-lg p-10 rounded-[2.5rem] border border-white shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] fade-in opacity-0 translate-y-8 relative group hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col justify-between" style="transition-delay: 300ms;">
+                    <span class="absolute top-6 right-8 font-serif text-8xl text-japandi-dark/5 group-hover:text-japandi-indigo/10 transition-colors duration-500 leading-none select-none">“</span>
+                    
+                    <div>
+                        <div class="flex items-center gap-4 mb-8 relative z-10">
+                            <div class="w-12 h-12 rounded-full bg-japandi-indigo/10 text-japandi-indigo flex items-center justify-center font-serif text-xl border border-japandi-indigo/20">C</div>
+                            <div>
+                                <p class="font-medium text-sm text-japandi-dark">Carlos Fernandez</p>
+                                <p class="text-xs text-japandi-dark/50 font-light">1 reseña</p>
+                            </div>
+                        </div>
+                        <div class="flex text-japandi-ochre gap-1 mb-6 relative z-10">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                        </div>
+                        <p class="font-serif italic text-japandi-dark/80 text-lg leading-relaxed mb-8 relative z-10">"Excelente servicio e instalaciones acogedoras, muy elegantes y con una vista simplemente impresionante."</p>
+                    </div>
+                    
+                    <div class="border-t border-japandi-dark/10 pt-5 relative z-10">
+                        <p class="text-[0.65rem] text-japandi-dark/40 uppercase tracking-[0.2em] font-semibold">Hace 1 mes en Google</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 5 -->
+                <div class="bg-white/70 backdrop-blur-lg p-10 rounded-[2.5rem] border border-white shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] fade-in opacity-0 translate-y-8 relative group hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col justify-between" style="transition-delay: 400ms;">
+                    <span class="absolute top-6 right-8 font-serif text-8xl text-japandi-dark/5 group-hover:text-japandi-dark/10 transition-colors duration-500 leading-none select-none">“</span>
+                    
+                    <div>
+                        <div class="flex items-center gap-4 mb-8 relative z-10">
+                            <div class="w-12 h-12 rounded-full bg-japandi-dark/5 text-japandi-dark/70 flex items-center justify-center font-serif text-xl border border-japandi-dark/10">J</div>
+                            <div>
+                                <p class="font-medium text-sm text-japandi-dark">Jader Alveiro R.</p>
+                                <p class="text-xs text-japandi-dark/50 font-light">1 reseña</p>
+                            </div>
+                        </div>
+                        <div class="flex text-japandi-ochre gap-1 mb-6 relative z-10">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                        </div>
+                        <p class="font-serif italic text-japandi-dark/80 text-lg leading-relaxed mb-8 relative z-10">"Un excelente lugar. Acogedor, supremamente tranquilo y muy bonito. Un escape 10/10."</p>
+                    </div>
+                    
+                    <div class="border-t border-japandi-dark/10 pt-5 relative z-10">
+                        <p class="text-[0.65rem] text-japandi-dark/40 uppercase tracking-[0.2em] font-semibold">Hace 6 meses en Google</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 6 -->
+                <div class="bg-white/70 backdrop-blur-lg p-10 rounded-[2.5rem] border border-white shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] fade-in opacity-0 translate-y-8 relative group hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col justify-between" style="transition-delay: 500ms;">
+                    <span class="absolute top-6 right-8 font-serif text-8xl text-japandi-dark/5 group-hover:text-[#7B8B78]/10 transition-colors duration-500 leading-none select-none">“</span>
+                    
+                    <div>
+                        <div class="flex items-center gap-4 mb-8 relative z-10">
+                            <div class="w-12 h-12 rounded-full bg-[#7B8B78]/10 text-[#7B8B78] flex items-center justify-center font-serif text-xl border border-[#7B8B78]/20">C</div>
+                            <div>
+                                <p class="font-medium text-sm text-japandi-dark">Claudia Tafur</p>
+                                <p class="text-xs text-japandi-dark/50 font-light">Local Guide</p>
+                            </div>
+                        </div>
+                        <div class="flex text-japandi-ochre gap-1 mb-6 relative z-10">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                        </div>
+                        <p class="font-serif italic text-japandi-dark/80 text-lg leading-relaxed mb-8 relative z-10">"Qué lugar más hermoso, es realmente mágico estar rodeado de tanta naturaleza."</p>
+                    </div>
+                    
+                    <div class="border-t border-japandi-dark/10 pt-5 relative z-10">
+                        <p class="text-[0.65rem] text-japandi-dark/40 uppercase tracking-[0.2em] font-semibold">Hace 1 mes en Google</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center fade-in opacity-0 translate-y-8 mt-4 flex justify-center">
+                <a href="https://maps.app.goo.gl/CWLZkdb8knnYL6W98" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-white border border-japandi-dark/10 rounded-full text-[0.7rem] uppercase tracking-[0.2em] text-japandi-dark font-semibold hover:border-japandi-dark hover:bg-japandi-dark hover:text-white transition-all duration-300 shadow-[0_10px_20px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.15)] group">
+                    <i data-lucide="map-pin" class="w-4 h-4 transition-transform group-hover:-translate-y-1"></i>
+                    Descubrir más historias en Google Maps
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOQUE 6: RESERVA -->
+    <section id="reserva" class="py-32 px-6 md:px-12 relative overflow-hidden bg-japandi-dark z-0 border-y border-japandi-ochre/10">
+        
+        <!-- LUXURY BACKGROUND LAYERS (NUEVO ESTILO CON 3 FIGURAS JAPANDI) -->
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+            <!-- 1. Textura Base (Bosque sutil con efecto parallax) -->
+            <div class="absolute inset-0 bg-[url('https://i.imgur.com/h1CpzAh.jpeg')] bg-cover bg-fixed bg-center opacity-[0.05] mix-blend-luminosity"></div>
+            <!-- Gradiente Profundo -->
+            <div class="absolute inset-0 bg-gradient-to-b from-japandi-dark via-[#151311]/70 to-japandi-dark"></div>
+
+            <!-- 2. LAS 3 FIGURAS JAPANDI (Estilo Arquitectónico Luxury) -->
+            <!-- Figura 1: Gran Arco Central (Estabilidad y Refugio) -->
+            <div class="absolute top-[-5%] left-1/2 -translate-x-1/2 w-[90%] max-w-[900px] h-[120%] border border-japandi-ochre/10 rounded-t-full"></div>
+            
+            <!-- Figura 2: Anillo Zen Desplazado (Fluidez) -->
+            <div class="absolute top-[5%] left-[-20%] md:left-[-10%] w-[40rem] h-[40rem] md:w-[55rem] md:h-[55rem] border border-japandi-moss/10 rounded-full"></div>
+            
+            <!-- Figura 3: Elemento Geométrico Asimétrico (Estructura y Cristal) -->
+            <div class="absolute bottom-[-10%] right-[-10%] md:right-0 w-[25rem] h-[35rem] md:w-[35rem] md:h-[45rem] border-l border-t border-white/5 rounded-tl-[8rem] bg-gradient-to-br from-white/[0.01] to-transparent backdrop-blur-[2px]"></div>
+            
+            <!-- Luces volumétricas para interactuar con las formas -->
+            <div class="absolute top-1/4 right-0 w-[30rem] h-[30rem] bg-japandi-ochre/5 rounded-full blur-[100px] translate-x-1/4"></div>
+            <div class="absolute bottom-1/4 left-0 w-[30rem] h-[30rem] bg-japandi-moss/5 rounded-full blur-[100px] -translate-x-1/4"></div>
+        </div>
+
+        <!-- Giant Typography -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 w-full overflow-hidden flex justify-center opacity-[0.015] select-none">
+            <span class="font-serif text-[12rem] md:text-[20rem] lg:text-[28rem] leading-none text-white whitespace-nowrap tracking-tighter">RESERVA</span>
+        </div>
+
+        <div class="max-w-5xl mx-auto relative z-10 fade-in opacity-0 translate-y-12">
+            
+            <!-- CUADRO LUXURY DE RESERVAS (MARCO ARQUITECTÓNICO) -->
+            <div class="relative p-[1px] rounded-[2.5rem] md:rounded-[3.5rem] bg-gradient-to-b from-japandi-ochre/40 via-white/5 to-transparent shadow-[0_40px_80px_-20px_rgba(0,0,0,0.9)]">
+                <!-- Inner Container -->
+                <div class="relative bg-[#151311] rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden">
+                    
+                    <!-- Marco Interior Arquitectónico (Inner Gold Frame) -->
+                    <div class="absolute inset-3 md:inset-4 border border-japandi-ochre/20 rounded-[2rem] md:rounded-[3rem] pointer-events-none z-0"></div>
+                    
+                    <!-- Efecto de resplandor interior -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[30rem] bg-japandi-ochre/5 blur-[80px] pointer-events-none z-0"></div>
+
+                    <!-- Contenido del Cuadro -->
+                    <div class="relative z-10 px-8 py-16 md:px-16 md:py-24">
+                        
+                        <!-- Header -->
+                        <div class="text-center mb-16 md:mb-20">
+                            <div class="flex items-center justify-center gap-4 mb-6">
+                                <span class="w-12 h-[1px] bg-japandi-ochre/50"></span>
+                                <span class="text-japandi-ochre text-[0.65rem] font-bold tracking-[0.3em] uppercase">Reservaciones</span>
+                                <span class="w-12 h-[1px] bg-japandi-ochre/50"></span>
+                            </div>
+                            <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-[1.1] drop-shadow-lg">
+                                Asegura tu espacio <br>
+                                <span class="italic font-light text-japandi-ochre/90">en la calma</span>
+                            </h2>
+                            <p class="text-white/50 font-light text-sm md:text-base max-w-md mx-auto leading-relaxed">
+                                Selecciona tus fechas para verificar disponibilidad. El primer paso hacia la pausa que necesitas.
+                            </p>
+                        </div>
+
+                        <form id="reservation-form" class="space-y-10 relative z-10">
+                            <!-- Cuadrícula Arquitectónica de Campos -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-y border-japandi-ochre/20 divide-y md:divide-y-0 md:divide-x divide-japandi-ochre/20 bg-black/20">
+                                
+                                <!-- LLEGADA -->
+                                <div class="relative group/field p-6 md:p-8 transition-colors duration-500 hover:bg-white/[0.02]">
+                                    <label class="block text-[0.6rem] uppercase tracking-[0.2em] text-white/40 font-semibold mb-3 flex items-center gap-3">
+                                        <span class="text-japandi-ochre">01.</span> Llegada
+                                    </label>
+                                    <div class="flex items-center relative">
+                                        <div class="w-full cursor-pointer relative">
+                                            <span id="display-checkin" class="block text-white/30 font-serif text-2xl md:text-3xl lg:text-4xl cursor-pointer transition-colors group-hover/field:text-white truncate pr-8">Seleccionar</span>
+                                            <input type="date" id="checkin" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SALIDA -->
+                                <div class="relative group/field p-6 md:p-8 transition-colors duration-500 hover:bg-white/[0.02]">
+                                    <label class="block text-[0.6rem] uppercase tracking-[0.2em] text-white/40 font-semibold mb-3 flex items-center gap-3">
+                                        <span class="text-japandi-ochre">02.</span> Salida
+                                    </label>
+                                    <div class="flex items-center relative">
+                                        <div class="w-full cursor-pointer relative">
+                                            <span id="display-checkout" class="block text-white/30 font-serif text-2xl md:text-3xl lg:text-4xl cursor-pointer transition-colors group-hover/field:text-white truncate pr-8">Seleccionar</span>
+                                            <input type="date" id="checkout" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SANTUARIO -->
+                                <div class="relative group/field p-6 md:p-8 transition-colors duration-500 hover:bg-white/[0.02]">
+                                    <label class="block text-[0.6rem] uppercase tracking-[0.2em] text-white/40 font-semibold mb-3 flex items-center gap-3">
+                                        <span class="text-japandi-ochre">03.</span> Refugio
+                                    </label>
+                                    <div class="flex items-center relative">
+                                        <select id="cabin-select" required class="w-full appearance-none bg-transparent font-serif text-2xl md:text-3xl lg:text-4xl text-white/30 hover:text-white focus:text-white cursor-pointer focus:outline-none transition-colors truncate pr-8">
+                                            <option value="" disabled selected class="bg-[#151311] text-white text-base font-sans">Elegir refugio...</option>
+                                            <option value="A" class="bg-[#151311] text-white text-base font-sans">Cabaña A</option>
+                                            <option value="B" class="bg-[#151311] text-white text-base font-sans">Cabaña B</option>
+                                            <option value="C" class="bg-[#151311] text-white text-base font-sans">Cabaña C</option>
+                                        </select>
+                                        <i data-lucide="chevron-down" class="w-5 h-5 text-japandi-ochre/50 absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none transition-colors group-hover/field:text-japandi-ochre"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-center mt-12 md:mt-16 pt-6">
+                                <button type="submit" class="group relative inline-flex items-center justify-center px-10 md:px-16 py-4 md:py-5 bg-transparent border border-japandi-ochre text-japandi-ochre rounded-full font-sans uppercase tracking-[0.25em] text-[0.7rem] font-semibold overflow-hidden transition-all duration-500 hover:scale-105 shadow-[0_0_20px_-10px_rgba(196,151,85,0.4)] hover:shadow-[0_0_30px_-5px_rgba(196,151,85,0.6)]">
+                                    <span class="relative z-10 flex items-center gap-3 transition-colors duration-500 group-hover:text-[#151311]">
+                                        Verificar Disponibilidad
+                                        <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
+                                    </span>
+                                    <div class="absolute inset-0 bg-japandi-ochre translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0"></div>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-center text-[0.6rem] text-white/30 uppercase tracking-[0.2em] mt-10 font-light">
+                Al solicitar la disponibilidad, aceptas nuestros Términos y Condiciones.
+            </p>
+        </div>
+    </section>
+
+    <!-- BLOQUE 7: FAQ -->
+    <section id="faq" class="py-32 px-6 md:px-12 relative overflow-hidden bg-japandi-light z-0 border-y border-japandi-dark/5">
+        
+        <!-- LUXURY BACKGROUND LAYERS: FAQ -->
+        <!-- 1. Ambient Glows -->
+        <div class="absolute top-0 left-0 w-[40rem] h-[40rem] bg-white/60 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/4 -z-20 pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-[40rem] h-[40rem] bg-japandi-ochre/5 rounded-full blur-[100px] translate-y-1/3 translate-x-1/4 -z-20 pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 w-[30rem] h-[30rem] bg-japandi-moss/5 rounded-full blur-[80px] -translate-y-1/2 -translate-x-1/2 -z-20 pointer-events-none"></div>
+        
+        <!-- 2. Subtle Texture (Nuevas líneas diagonales elegantes) -->
+        <div class="absolute inset-0 opacity-[0.025] -z-10 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #151311, #151311 1px, transparent 1px, transparent 4rem);"></div>
+        
+        <!-- 3. Architectural Framing Lines -->
+        <div class="absolute top-6 left-6 right-6 bottom-6 border border-japandi-dark/5 pointer-events-none -z-10 hidden md:block rounded-3xl"></div>
+        
+        <!-- 4. Marcas de agua (2 símbolos de interrogación "?") -->
+        <div class="absolute top-[5%] left-[-2%] md:left-[10%] pointer-events-none -z-10 opacity-[0.02] select-none mix-blend-multiply transform -rotate-12">
+            <span class="font-serif text-[18rem] md:text-[28rem] lg:text-[32rem] leading-none text-japandi-dark">?</span>
+        </div>
+        <div class="absolute bottom-[5%] right-[-2%] md:right-[10%] pointer-events-none -z-10 opacity-[0.02] select-none mix-blend-multiply transform rotate-[15deg]">
+            <span class="font-serif text-[18rem] md:text-[28rem] lg:text-[32rem] leading-none text-japandi-dark">?</span>
+        </div>
+
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="text-center mb-16 md:mb-20 fade-in opacity-0 translate-y-8">
+                <span class="text-japandi-ochre text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">Respuestas</span>
+                <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-japandi-dark leading-tight">Preguntas <br><span class="italic font-light text-japandi-moss/90">frecuentes</span></h2>
+            </div>
+            
+            <div class="space-y-2 fade-in opacity-0 translate-y-8" style="transition-delay: 200ms;">
+                
+                <!-- FAQ Item 1 -->
+                <div class="group border-b border-japandi-dark/10 hover:border-japandi-ochre transition-colors duration-500">
+                    <button class="accordion-btn w-full py-6 md:py-8 flex justify-between items-center text-left focus:outline-none">
+                        <span class="font-serif text-xl md:text-2xl text-japandi-dark group-hover:text-japandi-ochre transition-colors duration-500 pr-8">¿Las cabañas son iguales?</span>
+                        <div class="w-10 h-10 rounded-full border border-japandi-dark/10 flex items-center justify-center group-hover:border-japandi-ochre group-hover:bg-japandi-ochre/5 transition-all duration-500 shrink-0">
+                            <i data-lucide="plus" class="w-5 h-5 text-japandi-dark/40 group-hover:text-japandi-ochre transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                        <p class="pb-8 text-sm md:text-base text-japandi-dark/70 leading-relaxed font-light pl-4 border-l border-japandi-ochre/30 ml-2 mb-2">No, cada refugio posee su propia personalidad, diseño y encanto, garantizando una experiencia única en cada visita.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="group border-b border-japandi-dark/10 hover:border-japandi-moss transition-colors duration-500">
+                    <button class="accordion-btn w-full py-6 md:py-8 flex justify-between items-center text-left focus:outline-none">
+                        <span class="font-serif text-xl md:text-2xl text-japandi-dark group-hover:text-japandi-moss transition-colors duration-500 pr-8">¿Tienen zonas compartidas?</span>
+                        <div class="w-10 h-10 rounded-full border border-japandi-dark/10 flex items-center justify-center group-hover:border-japandi-moss group-hover:bg-japandi-moss/5 transition-all duration-500 shrink-0">
+                            <i data-lucide="plus" class="w-5 h-5 text-japandi-dark/40 group-hover:text-japandi-moss transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                        <p class="pb-8 text-sm md:text-base text-japandi-dark/70 leading-relaxed font-light pl-4 border-l border-japandi-moss/30 ml-2 mb-2">No, priorizamos tu privacidad y desconexión. Cada cabaña cuenta con su propia zona de fogata, malla catamarán y baño privado.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="group border-b border-japandi-dark/10 hover:border-japandi-indigo transition-colors duration-500">
+                    <button class="accordion-btn w-full py-6 md:py-8 flex justify-between items-center text-left focus:outline-none">
+                        <span class="font-serif text-xl md:text-2xl text-japandi-dark group-hover:text-japandi-indigo transition-colors duration-500 pr-8">¿Hay servicio de restaurante?</span>
+                        <div class="w-10 h-10 rounded-full border border-japandi-dark/10 flex items-center justify-center group-hover:border-japandi-indigo group-hover:bg-japandi-indigo/5 transition-all duration-500 shrink-0">
+                            <i data-lucide="plus" class="w-5 h-5 text-japandi-dark/40 group-hover:text-japandi-indigo transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                        <p class="pb-8 text-sm md:text-base text-japandi-dark/70 leading-relaxed font-light pl-4 border-l border-japandi-indigo/30 ml-2 mb-2">Sí, ofrecemos una experiencia gastronómica completa con un menú artesanal, resaltando los sabores locales y la comida honesta.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="group border-b border-japandi-dark/10 hover:border-[#8C7A6B] transition-colors duration-500">
+                    <button class="accordion-btn w-full py-6 md:py-8 flex justify-between items-center text-left focus:outline-none">
+                        <span class="font-serif text-xl md:text-2xl text-japandi-dark group-hover:text-[#8C7A6B] transition-colors duration-500 pr-8">¿Tienen Parqueadero?</span>
+                        <div class="w-10 h-10 rounded-full border border-japandi-dark/10 flex items-center justify-center group-hover:border-[#8C7A6B] group-hover:bg-[#8C7A6B]/5 transition-all duration-500 shrink-0">
+                            <i data-lucide="plus" class="w-5 h-5 text-japandi-dark/40 group-hover:text-[#8C7A6B] transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                        <p class="pb-8 text-sm md:text-base text-japandi-dark/70 leading-relaxed font-light pl-4 border-l border-[#8C7A6B]/30 ml-2 mb-2">Sí, contamos con un parqueadero privado y seguro dentro de nuestras instalaciones para tu total tranquilidad durante la estadía.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="group border-b border-japandi-dark/10 hover:border-japandi-ochre transition-colors duration-500">
+                    <button class="accordion-btn w-full py-6 md:py-8 flex justify-between items-center text-left focus:outline-none">
+                        <span class="font-serif text-xl md:text-2xl text-japandi-dark group-hover:text-japandi-ochre transition-colors duration-500 pr-8">¿Aceptan mascotas?</span>
+                        <div class="w-10 h-10 rounded-full border border-japandi-dark/10 flex items-center justify-center group-hover:border-japandi-ochre group-hover:bg-japandi-ochre/5 transition-all duration-500 shrink-0">
+                            <i data-lucide="plus" class="w-5 h-5 text-japandi-dark/40 group-hover:text-japandi-ochre transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                        <p class="pb-8 text-sm md:text-base text-japandi-dark/70 leading-relaxed font-light pl-4 border-l border-japandi-ochre/30 ml-2 mb-2">Con el fin de proteger la delicada fauna local, especialmente las aves nativas, y mantener el silencio del ecosistema, no permitimos el ingreso de mascotas.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 6 -->
+                <div class="group border-b border-japandi-dark/10 hover:border-japandi-moss transition-colors duration-500">
+                    <button class="accordion-btn w-full py-6 md:py-8 flex justify-between items-center text-left focus:outline-none">
+                        <span class="font-serif text-xl md:text-2xl text-japandi-dark group-hover:text-japandi-moss transition-colors duration-500 pr-8">¿Cuál es la temperatura del agua del jacuzzi?</span>
+                        <div class="w-10 h-10 rounded-full border border-japandi-dark/10 flex items-center justify-center group-hover:border-japandi-moss group-hover:bg-japandi-moss/5 transition-all duration-500 shrink-0">
+                            <i data-lucide="plus" class="w-5 h-5 text-japandi-dark/40 group-hover:text-japandi-moss transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                        <p class="pb-8 text-sm md:text-base text-japandi-dark/70 leading-relaxed font-light pl-4 border-l border-japandi-moss/30 ml-2 mb-2">El jacuzzi privado de la Cabaña A está climatizado y alcanza una temperatura máxima muy confortable de 32°C, ideal para contrastar con la bruma del bosque.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 7 -->
+                <div class="group border-b border-japandi-dark/10 hover:border-japandi-indigo transition-colors duration-500">
+                    <button class="accordion-btn w-full py-6 md:py-8 flex justify-between items-center text-left focus:outline-none">
+                        <span class="font-serif text-xl md:text-2xl text-japandi-dark group-hover:text-japandi-indigo transition-colors duration-500 pr-8">¿Cómo es el clima en el ecohostal?</span>
+                        <div class="w-10 h-10 rounded-full border border-japandi-dark/10 flex items-center justify-center group-hover:border-japandi-indigo group-hover:bg-japandi-indigo/5 transition-all duration-500 shrink-0">
+                            <i data-lucide="plus" class="w-5 h-5 text-japandi-dark/40 group-hover:text-japandi-indigo transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                        <p class="pb-8 text-sm md:text-base text-japandi-dark/70 leading-relaxed font-light pl-4 border-l border-japandi-indigo/30 ml-2 mb-2">Nos encontramos inmersos en un bosque de niebla, lo que proporciona un clima fresco y variable. Las temperaturas suelen oscilar placenteramente entre los 13°C y 25°C.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 8 -->
+                <div class="group border-b border-japandi-dark/10 hover:border-[#8C7A6B] transition-colors duration-500">
+                    <button class="accordion-btn w-full py-6 md:py-8 flex justify-between items-center text-left focus:outline-none">
+                        <span class="font-serif text-xl md:text-2xl text-japandi-dark group-hover:text-[#8C7A6B] transition-colors duration-500 pr-8">¿Dónde están ubicados exactamente?</span>
+                        <div class="w-10 h-10 rounded-full border border-japandi-dark/10 flex items-center justify-center group-hover:border-[#8C7A6B] group-hover:bg-[#8C7A6B]/5 transition-all duration-500 shrink-0">
+                            <i data-lucide="plus" class="w-5 h-5 text-japandi-dark/40 group-hover:text-[#8C7A6B] transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                        <p class="pb-8 text-sm md:text-base text-japandi-dark/70 leading-relaxed font-light pl-4 border-l border-[#8C7A6B]/30 ml-2 mb-2">Estamos en el emblemático Km 18 de la vía Cali - Buenaventura. Debes tomar el desvío de 2 km a mano izquierda justo después del puente amarillo (vía despavimentada pero accesible para todo vehículo).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-japandi-dark text-japandi-light pt-20 pb-12 px-6 md:px-12 border-t border-japandi-light/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
+                <div class="md:col-span-12 lg:col-span-5 flex flex-col justify-start">
+                    <a href="#" class="inline-flex items-center gap-4 mb-6 group">
+                        <img src="https://i.imgur.com/okUBI6k.jpeg" alt="La Pajarera EcoHostal Logo" class="w-12 h-12 rounded-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="flex flex-col">
+                            <span class="font-serif text-xl leading-tight tracking-wide text-white">La Pajarera</span>
+                            <span class="font-sans text-[0.6rem] tracking-[0.25em] uppercase text-japandi-light/60">EcoHostal</span>
+                        </div>
+                    </a>
+                    <p class="text-sm text-japandi-light/50 font-light leading-relaxed max-w-sm">
+                        Un refugio en el bosque de niebla del Km 18. Diseñado para la desconexión profunda, el avistamiento de aves y el retorno a lo esencial.
+                    </p>
+                </div>
+
+                <div class="md:col-span-4 lg:col-span-3 lg:col-start-7">
+                    <span class="block text-[0.65rem] uppercase tracking-[0.2em] text-japandi-light/40 font-semibold mb-6">Navegación</span>
+                    <ul class="space-y-4">
+                        <li><a href="#ubicacion" class="text-sm text-japandi-light/70 hover:text-white transition-colors duration-300 font-light inline-block relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-white after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Ubicación</a></li>
+                        <li><a href="#esencia" class="text-sm text-japandi-light/70 hover:text-white transition-colors duration-300 font-light inline-block relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-white after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Gastronomía</a></li>
+                        <li><a href="#mecanismo" class="text-sm text-japandi-light/70 hover:text-white transition-colors duration-300 font-light inline-block relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-white after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">La Experiencia</a></li>
+                        <li><a href="#santuarios" class="text-sm text-japandi-light/70 hover:text-white transition-colors duration-300 font-light inline-block relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-white after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Refugios</a></li>
+                        <li><a href="#voces" class="text-sm text-japandi-light/70 hover:text-white transition-colors duration-300 font-light inline-block relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-white after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Reseñas</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-8 lg:col-span-3 flex flex-col justify-between">
+                    <div>
+                        <span class="block text-[0.65rem] uppercase tracking-[0.2em] text-japandi-light/40 font-semibold mb-6">Contacto</span>
+                        <address class="not-italic space-y-4">
+                            <p class="text-sm text-japandi-light/70 font-light">
+                                Km 18 Vía al Mar (Cali - Buenaventura)<br>
+                                A 2 Km del puente amarillo<br>
+                                Valle del Cauca, Colombia
+                            </p>
+                            <a href="mailto:reservas@lapajarera.com" class="block text-sm text-japandi-light/70 hover:text-white transition-colors duration-300 font-light">
+                                reservas@lapajarera.com
+                            </a>
+                            <a href="https://wa.me/573182408981" target="_blank" rel="noopener noreferrer" class="block text-sm text-japandi-light/70 hover:text-white transition-colors duration-300 font-light">
+                                +57 318 2408981
+                            </a>
+                        </address>
+                    </div>
+                    <div class="mt-8 flex gap-6">
+                        <a href="#" aria-label="Instagram" class="text-japandi-light/50 hover:text-white transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" aria-label="Facebook" class="text-japandi-light/50 hover:text-white transition-colors">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://maps.app.goo.gl/CWLZkdb8knnYL6W98" target="_blank" rel="noopener noreferrer" aria-label="Google Maps" class="text-japandi-light/50 hover:text-white transition-colors">
+                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://wa.me/573182408981" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="text-japandi-light/50 hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-japandi-light/10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[0.6rem] uppercase tracking-[0.15em] text-japandi-light/40 order-2 md:order-1">
+                    &copy; 2026 La Pajarera EcoHostal. Todos los derechos reservados.
+                </p>
+                <div class="flex flex-wrap justify-center gap-6 order-1 md:order-2">
+                    <a href="#" class="text-[0.6rem] uppercase tracking-[0.15em] text-japandi-light/40 hover:text-white transition-colors">Aviso de Privacidad</a>
+                    <a href="#" class="text-[0.6rem] uppercase tracking-[0.15em] text-japandi-light/40 hover:text-white transition-colors">Términos y Condiciones</a>
+                    <a href="#" class="text-[0.6rem] uppercase tracking-[0.15em] text-japandi-light/40 hover:text-white transition-colors">Políticas de Cancelación</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTONES FLOTANTES LUXURY -->
+    <div class="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[100] flex items-end gap-3 md:gap-4">
+        
+        <!-- Botón de WhatsApp Flotante -->
+        <a href="https://wa.me/573182408981" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp" class="group flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-japandi-ochre text-white rounded-full shadow-[0_10px_20px_-10px_rgba(196,151,85,0.8)] hover:shadow-[0_15px_30px_-10px_rgba(196,151,85,1)] transition-all duration-500 hover:-translate-y-1 relative">
+            <!-- Anillo pulsante suave -->
+            <div class="absolute inset-0 rounded-full border border-japandi-ochre animate-[ping_2.5s_cubic-bezier(0,0,0.2,1)_infinite] opacity-60"></div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 relative z-10 transition-transform duration-300 group-hover:scale-110">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path>
+                            </svg>
+                        </a>
+    </div>
+
+    <!-- LÓGICA JAVASCRIPT -->
+    <script>
+        lucide.createIcons();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const preloader = document.getElementById('preloader');
+            // Bloquear el scroll mientras carga
+            document.body.style.overflow = 'hidden'; 
+            
+            // Retirar preloader después de 3 segundos
+            setTimeout(() => {
+                preloader.classList.add('opacity-0');
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    // Restaurar el scroll suave
+                    document.body.style.overflow = ''; 
+                }, 1000); // 1 segundo extra para terminar la transición de desvanecimiento
+            }, 3000);
+
+            // --- 0. Lógica del Slideshow del Hero ---
+            const heroImages = [
+                "https://i.imgur.com/h1CpzAh.jpeg",
+                "https://i.imgur.com/0lnXa5V.jpeg",
+                "https://i.imgur.com/RYdzYe4.jpeg",
+                "https://i.imgur.com/PIVV1no.jpeg",
+                "https://i.imgur.com/kUgBNcX.jpeg",
+                "https://i.imgur.com/4EXasXl.jpeg",
+                "https://i.imgur.com/6cMz8JF.jpeg",
+                "https://i.imgur.com/KNAsXEA.jpeg",
+                "https://i.imgur.com/etA6Yyo.jpeg",
+                "https://i.imgur.com/WimX03n.jpeg"
+            ];
+
+            const slideshowContainer = document.getElementById('hero-slideshow');
+            const indicatorsContainer = document.getElementById('slide-indicators');
+            let currentSlide = 0;
+
+            heroImages.forEach((imgSrc, index) => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.alt = `Slideshow image ${index + 1}`;
+                img.className = `absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === 0 ? 'opacity-100 animate-slow-pan' : 'opacity-0'}`;
+                img.id = `slide-img-${index}`;
+                slideshowContainer.appendChild(img);
+
+                const indicator = document.createElement('div');
+                indicator.className = `h-[2px] w-6 md:w-8 rounded-full transition-all duration-500 cursor-pointer ${index === 0 ? 'bg-white' : 'bg-white/30'}`;
+                indicator.id = `slide-dot-${index}`;
+                
+                indicator.addEventListener('click', () => {
+                    changeSlide(index);
+                    clearInterval(slideInterval);
+                    slideInterval = setInterval(() => { changeSlide((currentSlide + 1) % heroImages.length) }, 5000);
+                });
+
+                indicatorsContainer.appendChild(indicator);
+            });
+
+            function changeSlide(nextIndex) {
+                const currentImg = document.getElementById(`slide-img-${currentSlide}`);
+                const currentDot = document.getElementById(`slide-dot-${currentSlide}`);
+                
+                currentImg.classList.remove('opacity-100', 'animate-slow-pan');
+                currentImg.classList.add('opacity-0');
+                
+                currentDot.classList.remove('bg-white');
+                currentDot.classList.add('bg-white/30');
+
+                currentSlide = nextIndex;
+                const nextImg = document.getElementById(`slide-img-${currentSlide}`);
+                const nextDot = document.getElementById(`slide-dot-${currentSlide}`);
+
+                nextImg.classList.remove('opacity-0');
+                setTimeout(() => {
+                    nextImg.classList.add('opacity-100', 'animate-slow-pan');
+                }, 50);
+                
+                nextDot.classList.remove('bg-white/30');
+                nextDot.classList.add('bg-white');
+            }
+
+            let slideInterval = setInterval(() => {
+                const nextIndex = (currentSlide + 1) % heroImages.length;
+                changeSlide(nextIndex);
+            }, 5000);
+
+            // 1. Lógica del Navbar en Scroll
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > window.innerHeight * 0.2) {
+                    navbar.classList.remove('-translate-y-full', 'opacity-0');
+                    navbar.classList.add('translate-y-0', 'opacity-100');
+                } else {
+                    navbar.classList.add('-translate-y-full', 'opacity-0');
+                    navbar.classList.remove('translate-y-0', 'opacity-100');
+                }
+            });
+
+            // 2. Lógica del Menú Móvil
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            let isMenuOpen = false;
+
+            function toggleMenu() {
+                isMenuOpen = !isMenuOpen;
+                mobileBtn.classList.toggle('menu-open');
+                
+                if (isMenuOpen) {
+                    mobileMenu.classList.remove('translate-x-full');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    mobileMenu.classList.add('translate-x-full');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            mobileBtn.addEventListener('click', toggleMenu);
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+
+            // 3. Animaciones Fade-In
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('opacity-0', 'translate-y-8', 'translate-y-12');
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(element => {
+                observer.observe(element);
+            });
+
+            // 4. Lógica de Fechas
+            const checkinInput = document.getElementById('checkin');
+            const checkoutInput = document.getElementById('checkout');
+            const displayCheckin = document.getElementById('display-checkin');
+            const displayCheckout = document.getElementById('display-checkout');
+
+            const formatDate = (dateString) => {
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                const date = new Date(dateString + 'T00:00:00');
+                return date.toLocaleDateString('es-ES', options);
+            };
+
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const minDate = `${yyyy}-${mm}-${dd}`;
+            
+            checkinInput.min = minDate;
+
+            checkinInput.addEventListener('change', (e) => {
+                const checkinDateStr = e.target.value;
+                if (!checkinDateStr) return;
+
+                displayCheckin.textContent = formatDate(checkinDateStr);
+                displayCheckin.classList.remove('text-japandi-dark/40', 'text-japandi-dark/50', 'text-white/30');
+                displayCheckin.classList.add('text-white');
+
+                const checkinDate = new Date(checkinDateStr + 'T00:00:00');
+                const nextDay = new Date(checkinDate);
+                nextDay.setDate(nextDay.getDate() + 1);
+                
+                const nextY = nextDay.getFullYear();
+                const nextM = String(nextDay.getMonth() + 1).padStart(2, '0');
+                const nextD = String(nextDay.getDate()).padStart(2, '0');
+                const minCheckout = `${nextY}-${nextM}-${nextD}`;
+
+                checkoutInput.min = minCheckout;
+
+                if (!checkoutInput.value || checkoutInput.value <= checkinDateStr) {
+                    checkoutInput.value = minCheckout;
+                    displayCheckout.textContent = formatDate(minCheckout);
+                    displayCheckout.classList.remove('text-japandi-dark/40', 'text-japandi-dark/50', 'text-white/30');
+                    displayCheckout.classList.add('text-white');
+                }
+            });
+
+            checkoutInput.addEventListener('change', (e) => {
+                if (e.target.value) {
+                    displayCheckout.textContent = formatDate(e.target.value);
+                    displayCheckout.classList.remove('text-japandi-dark/40', 'text-japandi-dark/50', 'text-white/30');
+                    displayCheckout.classList.add('text-white');
+                }
+            });
+
+            // 5. Lógica del Acordeón FAQ
+            const accordions = document.querySelectorAll('.accordion-btn');
+            
+            accordions.forEach(acc => {
+                acc.addEventListener('click', function() {
+                    accordions.forEach(otherAcc => {
+                        if (otherAcc !== this) {
+                            otherAcc.classList.remove('active');
+                            otherAcc.nextElementSibling.style.maxHeight = null;
+                            // Lucide reemplaza la etiqueta <i> por <svg>, buscamos dinámicamente
+                            const otherIcon = otherAcc.querySelector('svg') || otherAcc.querySelector('i');
+                            if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+                        }
+                    });
+
+                    this.classList.toggle('active');
+                    const panel = this.nextElementSibling;
+                    const icon = this.querySelector('svg') || this.querySelector('i');
+                    
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                        if (icon) icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                        if (icon) icon.style.transform = 'rotate(45deg)';
+                    }
+                });
+            });
+
+            // 6. Lógica de Audio del Video
+            const ritualVideoContainer = document.getElementById('ritual-video-container');
+            const ritualVideo = document.getElementById('ritual-video');
+            const ritualVideoIcon = document.getElementById('ritual-video-icon');
+            const ritualVideoText = document.getElementById('ritual-video-text');
+
+            if (ritualVideoContainer && ritualVideo) {
+                ritualVideoContainer.addEventListener('click', () => {
+                    ritualVideo.muted = !ritualVideo.muted;
+                    
+                    if (ritualVideo.muted) {
+                        ritualVideoIcon.setAttribute('data-lucide', 'volume-x');
+                        ritualVideoText.textContent = 'El Silencio';
+                    } else {
+                        ritualVideoIcon.setAttribute('data-lucide', 'volume-2');
+                        ritualVideoText.textContent = 'Sonido Ambiente';
+                    }
+                    lucide.createIcons();
+                });
+            }
+
+            // 7. Lógica de Carrusel de Cabañas (5 Imágenes cada 15s)
+            const cabinCarousels = document.querySelectorAll('.cabin-carousel-container');
+
+            cabinCarousels.forEach((carousel) => {
+                const items = carousel.querySelectorAll('.carousel-item');
+                const dotsContainer = carousel.querySelector('.dots-container');
+                let currentIndex = 0;
+                let slideInterval;
+
+                // Generar puntos (dots) dinámicamente
+                items.forEach((_, i) => {
+                    const dot = document.createElement('button');
+                    // Estilo inicial: el primero es más ancho y opaco, los demás son pequeños y semi-transparentes
+                    dot.className = `h-1.5 rounded-full transition-all duration-500 ${i === 0 ? 'bg-white w-4' : 'bg-white/50 w-1.5 hover:bg-white/80'}`;
+                    dot.setAttribute('aria-label', `Ver imagen ${i + 1}`);
+                    dot.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        goToSlide(i);
+                        resetInterval();
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+
+                const dots = dotsContainer.querySelectorAll('button');
+
+                function goToSlide(index) {
+                    // Ocultar actual
+                    items[currentIndex].classList.remove('opacity-100', 'z-10');
+                    items[currentIndex].classList.add('opacity-0', 'z-0');
+                    dots[currentIndex].classList.remove('bg-white', 'w-4');
+                    dots[currentIndex].classList.add('bg-white/50', 'w-1.5');
+
+                    // Mostrar nuevo
+                    currentIndex = index;
+                    items[currentIndex].classList.remove('opacity-0', 'z-0');
+                    items[currentIndex].classList.add('opacity-100', 'z-10');
+                    dots[currentIndex].classList.remove('bg-white/50', 'w-1.5');
+                    dots[currentIndex].classList.add('bg-white', 'w-4');
+                    
+                    // Si el slide actual es un video, lo reiniciamos
+                    const video = items[currentIndex].querySelector('video');
+                    if(video) {
+                        video.currentTime = 0;
+                        video.play().catch(() => {}); // Prevenir errores si el navegador bloquea el autoplay
+                    }
+                }
+
+                function nextSlide() {
+                    const nextIndex = (currentIndex + 1) % items.length;
+                    goToSlide(nextIndex);
+                }
+
+                function resetInterval() {
+                    clearInterval(slideInterval);
+                    // Cambiar cada 15 segundos (15000 ms)
+                    slideInterval = setInterval(nextSlide, 15000);
+                }
+
+                // Iniciar el ciclo
+                resetInterval();
+            });
+
+            // 8. Lógica de selección de cabañas
+            const cabinSelect = document.getElementById('cabin-select');
+            
+            // Cambiar color cuando se selecciona manualmente
+            if(cabinSelect) {
+                cabinSelect.addEventListener('change', (e) => {
+                    if(e.target.value) {
+                        cabinSelect.classList.remove('text-white/30');
+                        cabinSelect.classList.add('text-white');
+                    }
+                });
+            }
+
+            // Función para los botones "Seleccionar Fechas"
+            window.selectCabin = function(cabinValue) {
+                if(cabinSelect) {
+                    cabinSelect.value = cabinValue;
+                    // Cambiar color para que se vea seleccionado
+                    cabinSelect.classList.remove('text-white/30');
+                    cabinSelect.classList.add('text-white');
+                }
+            };
+
+            // 9. Lógica de Envío de Reserva a WhatsApp
+            const reservationForm = document.getElementById('reservation-form');
+            if(reservationForm) {
+                reservationForm.addEventListener('submit', (e) => {
+                    e.preventDefault(); // Evita recargar la página
+                    const checkin = checkinInput.value;
+                    const checkout = checkoutInput.value;
+                    const cabin = cabinSelect.value;
+                    
+                    if(checkin && checkout && cabin) {
+                        // Formatear fechas a un formato legible (DD/MM/YYYY) para el mensaje
+                        const formatForMsg = (dateStr) => {
+                            const [year, month, day] = dateStr.split('-');
+                            return `${day}/${month}/${year}`;
+                        };
+
+                        const mensaje = `¡Hola! Me gustaría reservar en La Pajarera EcoHostal.%0A%0A*Refugio:* Cabaña ${cabin}%0A*Check-in:* ${formatForMsg(checkin)}%0A*Check-out:* ${formatForMsg(checkout)}%0A%0A¿Me podrían confirmar disponibilidad y detalles, por favor?`;
+                        
+                        // Abrir enlace de WhatsApp con el número ingresado
+                        window.open(`https://wa.me/573182408981?text=${mensaje}`, '_blank');
+                    }
+                });
+            }
+
+            // 10. Lógica de Envío de WhatsApp para el Menú
+            const menuWhatsappBtn = document.getElementById('menu-whatsapp-btn');
+            if (menuWhatsappBtn) {
+                menuWhatsappBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const mensaje = `¡Hola! Estoy explorando la página web de La Pajarera EcoHostal y me gustaría descubrir más sobre su menú y opciones de gastronomía consciente. ¿Podrían compartirme más información?`;
+                    window.open(`https://wa.me/573182408981?text=${mensaje}`, '_blank');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

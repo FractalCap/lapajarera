@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Pajarera EcoHostal | Glamping & Cabañas</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/okUBI6k.jpeg">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -952,59 +955,90 @@
                                     
                                     <!-- LLEGADA -->
                                     <div class="relative group/field p-6 md:p-8 transition-colors duration-500 hover:bg-white/[0.02]">
-                                        <span class="text-japandi-ochre">01.</span> Llegada
-                                    </label>
-                                    <div class="flex items-center relative">
-                                        <div class="w-full cursor-pointer relative">
-                                            <span id="display-checkin" class="block text-white/30 font-serif text-2xl md:text-3xl lg:text-4xl cursor-pointer transition-colors group-hover/field:text-white truncate pr-8">Seleccionar</span>
-                                            <input type="date" id="checkin" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required>
+                                        <label class="block text-[0.6rem] uppercase tracking-[0.2em] text-white/40 font-semibold mb-3 flex items-center gap-3">
+                                            <span class="text-japandi-ochre">01.</span> Llegada
+                                        </label>
+                                        <div class="flex items-center relative">
+                                            <div class="w-full cursor-pointer relative">
+                                                <span id="display-checkin" class="block text-white/30 font-serif text-2xl md:text-3xl lg:text-4xl cursor-pointer transition-colors group-hover/field:text-white truncate pr-8">Seleccionar</span>
+                                                <input type="date" id="checkin" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- SALIDA -->
+                                    <div class="relative group/field p-6 md:p-8 transition-colors duration-500 hover:bg-white/[0.02]">
+                                        <label class="block text-[0.6rem] uppercase tracking-[0.2em] text-white/40 font-semibold mb-3 flex items-center gap-3">
+                                            <span class="text-japandi-ochre">02.</span> Salida
+                                        </label>
+                                        <div class="flex items-center relative">
+                                            <div class="w-full cursor-pointer relative">
+                                                <span id="display-checkout" class="block text-white/30 font-serif text-2xl md:text-3xl lg:text-4xl cursor-pointer transition-colors group-hover/field:text-white truncate pr-8">Seleccionar</span>
+                                                <input type="date" id="checkout" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- SANTUARIO -->
+                                    <div class="relative group/field p-6 md:p-8 transition-colors duration-500 hover:bg-white/[0.02]">
+                                        <label class="block text-[0.6rem] uppercase tracking-[0.2em] text-white/40 font-semibold mb-3 flex items-center gap-3">
+                                            <span class="text-japandi-ochre">03.</span> Refugio
+                                        </label>
+                                        <div class="flex items-center relative">
+                                            <select id="cabin-select" required class="w-full appearance-none bg-transparent font-serif text-2xl md:text-3xl lg:text-4xl text-white/30 hover:text-white focus:text-white cursor-pointer focus:outline-none transition-colors truncate pr-8">
+                                                <option value="" disabled selected class="bg-[#151311] text-white text-base font-sans">Elegir refugio...</option>
+                                                <option value="A" class="bg-[#151311] text-white text-base font-sans">Cabaña A</option>
+                                                <option value="B" class="bg-[#151311] text-white text-base font-sans">Cabaña B</option>
+                                                <option value="C" class="bg-[#151311] text-white text-base font-sans">Cabaña C</option>
+                                            </select>
+                                            <i data-lucide="chevron-down" class="w-5 h-5 text-japandi-ochre/50 absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none transition-colors group-hover/field:text-japandi-ochre"></i>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- SALIDA -->
+                                
+                                <!-- CÓDIGO DE DESCUENTO -->
                                 <div class="relative group/field p-6 md:p-8 transition-colors duration-500 hover:bg-white/[0.02]">
                                     <label class="block text-[0.6rem] uppercase tracking-[0.2em] text-white/40 font-semibold mb-3 flex items-center gap-3">
-                                        <span class="text-japandi-ochre">02.</span> Salida
+                                        <span class="text-japandi-ochre">04.</span> Código de descuento <span class="text-white/20 lowercase tracking-normal font-sans ml-2">(opcional)</span>
                                     </label>
                                     <div class="flex items-center relative">
-                                        <div class="w-full cursor-pointer relative">
-                                            <span id="display-checkout" class="block text-white/30 font-serif text-2xl md:text-3xl lg:text-4xl cursor-pointer transition-colors group-hover/field:text-white truncate pr-8">Seleccionar</span>
-                                            <input type="date" id="checkout" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required>
+                                        <input type="text" id="promo-code" placeholder="Añadir código..." class="w-full bg-transparent font-serif text-2xl md:text-3xl lg:text-4xl text-white placeholder-white/20 focus:outline-none transition-colors uppercase">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="reservation-summary" class="opacity-0 max-h-0 overflow-hidden transition-all duration-700 ease-in-out px-4 md:px-0">
+                                <div class="border border-japandi-ochre/20 rounded-2xl bg-white/[0.02] p-6 md:p-8 backdrop-blur-sm mt-8">
+                                    <h4 class="text-japandi-ochre font-serif text-xl mb-4 border-b border-japandi-ochre/20 pb-3 flex items-center gap-2">
+                                        <i data-lucide="calculator" class="w-5 h-5 text-japandi-ochre/80"></i> Resumen de la pausa
+                                    </h4>
+                                    <div class="space-y-3 font-sans text-sm text-white/70">
+                                        <div id="summary-weekdays-row" class="flex justify-between hidden transition-all duration-300">
+                                            <span>Noches Lunes a Jueves (<span id="summary-weekdays-count">0</span>)</span>
+                                            <span id="summary-weekdays-cost" class="font-medium text-white">$0</span>
+                                        </div>
+                                        <div id="summary-weekends-row" class="flex justify-between hidden transition-all duration-300">
+                                            <span>Noches FDS y Festivos (<span id="summary-weekends-count">0</span>)</span>
+                                            <span id="summary-weekends-cost" class="font-medium text-white">$0</span>
+                                        </div>
+                                        <div class="border-t border-white/10 pt-3 mt-3 flex justify-between font-medium">
+                                            <span>Subtotal</span>
+                                            <span id="summary-subtotal" class="text-white">$0</span>
+                                        </div>
+                                        <div id="summary-discount-row" class="flex justify-between text-japandi-ochre hidden transition-all duration-300 font-medium">
+                                            <span>Descuento (10%)</span>
+                                            <span id="summary-discount">-$0</span>
+                                        </div>
+                                        <div class="border-t border-japandi-ochre/20 pt-4 mt-4 flex justify-between items-center">
+                                            <span class="text-sm uppercase tracking-widest text-white/60 font-semibold">Total Estimado</span>
+                                            <span id="summary-total" class="text-2xl md:text-3xl text-white font-serif tracking-wide">$0</span>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- SANTUARIO -->
-                                <div class="relative group/field p-6 md:p-8 transition-colors duration-500 hover:bg-white/[0.02]">
-                                    <label class="block text-[0.6rem] uppercase tracking-[0.2em] text-white/40 font-semibold mb-3 flex items-center gap-3">
-                                        <span class="text-japandi-ochre">03.</span> Refugio
-                                    </label>
-                                    <div class="flex items-center relative">
-                                        <select id="cabin-select" required class="w-full appearance-none bg-transparent font-serif text-2xl md:text-3xl lg:text-4xl text-white/30 hover:text-white focus:text-white cursor-pointer focus:outline-none transition-colors truncate pr-8">
-                                            <option value="" disabled selected class="bg-[#151311] text-white text-base font-sans">Elegir refugio...</option>
-                                            <option value="A" class="bg-[#151311] text-white text-base font-sans">Cabaña A</option>
-                                            <option value="B" class="bg-[#151311] text-white text-base font-sans">Cabaña B</option>
-                                            <option value="C" class="bg-[#151311] text-white text-base font-sans">Cabaña C</option>
-                                        </select>
-                                        <i data-lucide="chevron-down" class="w-5 h-5 text-japandi-ochre/50 absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none transition-colors group-hover/field:text-japandi-ochre"></i>
-                                    </div>
-                                </div>
                             </div>
-                            
-                            <!-- CÓDIGO DE DESCUENTO -->
-                            <div class="relative group/field p-6 md:p-8 transition-colors duration-500 hover:bg-white/[0.02]">
-                                <label class="block text-[0.6rem] uppercase tracking-[0.2em] text-white/40 font-semibold mb-3 flex items-center gap-3">
-                                    <span class="text-japandi-ochre">04.</span> Código de descuento <span class="text-white/20 lowercase tracking-normal font-sans ml-2">(opcional)</span>
-                                </label>
-                                <div class="flex items-center relative">
-                                    <input type="text" id="promo-code" placeholder="Añadir código..." class="w-full bg-transparent font-serif text-2xl md:text-3xl lg:text-4xl text-white placeholder-white/20 focus:outline-none transition-colors uppercase">
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="flex justify-center mt-12 md:mt-16 pt-6">
-                            <button type="submit" class="group relative inline-flex items-center justify-center px-10 md:px-16 py-4 md:py-5 bg-transparent border border-japandi-ochre text-japandi-ochre rounded-full font-sans uppercase tracking-[0.25em] text-[0.7rem] font-semibold overflow-hidden transition-all duration-500 hover:scale-105 shadow-[0_0_20px_-10px_rgba(196,151,85,0.4)] hover:shadow-[0_0_30px_-5px_rgba(196,151,85,0.6)]">
+                            <div class="flex justify-center mt-12 md:mt-16 pt-6">
+                                <button type="submit" class="group relative inline-flex items-center justify-center px-10 md:px-16 py-4 md:py-5 bg-transparent border border-japandi-ochre text-japandi-ochre rounded-full font-sans uppercase tracking-[0.25em] text-[0.7rem] font-semibold overflow-hidden transition-all duration-500 hover:scale-105 shadow-[0_0_20px_-10px_rgba(196,151,85,0.4)] hover:shadow-[0_0_30px_-5px_rgba(196,151,85,0.6)]">
                                     <span class="relative z-10 flex items-center gap-3 transition-colors duration-500 group-hover:text-[#151311]">
                                         Verificar Disponibilidad
                                         <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
@@ -1645,35 +1679,176 @@
                     // Cambiar color para que se vea seleccionado
                     cabinSelect.classList.remove('text-white/30');
                     cabinSelect.classList.add('text-white');
+                    
+                    // Disparar evento change manualmente para actualizar el resumen
+                    cabinSelect.dispatchEvent(new Event('change'));
                 }
             };
+
+            // 8.5 Lógica de Resumen Dinámico y Cálculo de Precios
+            const promoCodeInput = document.getElementById('promo-code');
+            const summaryContainer = document.getElementById('reservation-summary');
+            const summaryWeekdaysRow = document.getElementById('summary-weekdays-row');
+            const summaryWeekendsRow = document.getElementById('summary-weekends-row');
+            const summaryDiscountRow = document.getElementById('summary-discount-row');
+            
+            // Festivos en Colombia 2026 (Estimados para cálculo)
+            const holidays2026 = [
+                "2026-01-01", "2026-01-12", "2026-03-23", "2026-04-02", "2026-04-03",
+                "2026-05-01", "2026-05-18", "2026-06-08", "2026-06-15", "2026-06-29",
+                "2026-07-20", "2026-08-07", "2026-08-17", "2026-10-12", "2026-11-02",
+                "2026-11-16", "2026-12-08", "2026-12-25"
+            ];
+
+            const PRICE_WEEKDAY = 380000;
+            const PRICE_WEEKEND = 520000;
+            let currentSummary = null;
+
+            const formatCurrency = (amount) => {
+                return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(amount);
+            };
+
+            const calculateReservation = () => {
+                const checkin = checkinInput.value;
+                const checkout = checkoutInput.value;
+                const cabin = cabinSelect.value;
+                const promo = (promoCodeInput?.value || '').trim().toLowerCase();
+
+                // Ocultar si faltan datos
+                if (!checkin || !checkout || !cabin) {
+                    summaryContainer.classList.remove('opacity-100');
+                    summaryContainer.classList.add('opacity-0');
+                    summaryContainer.style.maxHeight = '0px';
+                    currentSummary = null;
+                    return;
+                }
+
+                const startDate = new Date(checkin + 'T00:00:00');
+                const endDate = new Date(checkout + 'T00:00:00');
+                
+                if (startDate >= endDate) return; // Fechas inválidas
+
+                let weekdays = 0;
+                let weekends = 0;
+                let currentDate = new Date(startDate);
+
+                // Evaluar día por día
+                while (currentDate < endDate) {
+                    const dayOfWeek = currentDate.getDay(); // 0: Dom, 5: Vie, 6: Sab
+                    const isoDate = currentDate.toISOString().split('T')[0];
+                    
+                    if (dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6 || holidays2026.includes(isoDate)) {
+                        weekends++;
+                    } else {
+                        weekdays++;
+                    }
+                    currentDate.setDate(currentDate.getDate() + 1);
+                }
+
+                const costWeekdays = weekdays * PRICE_WEEKDAY;
+                const costWeekends = weekends * PRICE_WEEKEND;
+                const subtotal = costWeekdays + costWeekends;
+                
+                let discount = 0;
+                let isPromoValid = false;
+                
+                // Descuento en tiempo real
+                if (promo === 'nuestroplann') {
+                    discount = subtotal * 0.10;
+                    isPromoValid = true;
+                }
+                
+                const total = subtotal - discount;
+
+                // Actualizar Textos en el DOM
+                if (weekdays > 0) {
+                    document.getElementById('summary-weekdays-count').textContent = weekdays;
+                    document.getElementById('summary-weekdays-cost').textContent = formatCurrency(costWeekdays);
+                    summaryWeekdaysRow.classList.remove('hidden');
+                } else {
+                    summaryWeekdaysRow.classList.add('hidden');
+                }
+
+                if (weekends > 0) {
+                    document.getElementById('summary-weekends-count').textContent = weekends;
+                    document.getElementById('summary-weekends-cost').textContent = formatCurrency(costWeekends);
+                    summaryWeekendsRow.classList.remove('hidden');
+                } else {
+                    summaryWeekendsRow.classList.add('hidden');
+                }
+
+                document.getElementById('summary-subtotal').textContent = formatCurrency(subtotal);
+
+                if (isPromoValid) {
+                    document.getElementById('summary-discount').textContent = `-${formatCurrency(discount)}`;
+                    summaryDiscountRow.classList.remove('hidden');
+                } else {
+                    summaryDiscountRow.classList.add('hidden');
+                }
+
+                document.getElementById('summary-total').textContent = formatCurrency(total);
+
+                // Mostrar Contenedor de forma fluida
+                summaryContainer.classList.remove('opacity-0');
+                summaryContainer.classList.add('opacity-100');
+                summaryContainer.style.maxHeight = summaryContainer.scrollHeight + 100 + 'px'; // +100px para evitar recortes en bordes
+
+                // Guardar estado actual para WhatsApp
+                currentSummary = {
+                    weekdays, costWeekdays,
+                    weekends, costWeekends,
+                    subtotal, discount, total, isPromoValid, promo
+                };
+            };
+
+            // Listeners para recálculo automático
+            checkinInput.addEventListener('change', calculateReservation);
+            checkoutInput.addEventListener('change', calculateReservation);
+            cabinSelect.addEventListener('change', calculateReservation);
+            if (promoCodeInput) {
+                promoCodeInput.addEventListener('input', calculateReservation);
+            }
 
             // 9. Lógica de Envío de Reserva a WhatsApp
             const reservationForm = document.getElementById('reservation-form');
             if(reservationForm) {
                 reservationForm.addEventListener('submit', (e) => {
-                    e.preventDefault(); // Evita recargar la página
+                    e.preventDefault();
+                    
+                    if(!currentSummary) {
+                        calculateReservation(); // Forzar cálculo de seguridad
+                    }
+
                     const checkin = checkinInput.value;
                     const checkout = checkoutInput.value;
                     const cabin = cabinSelect.value;
-                    const promoCode = document.getElementById('promo-code')?.value.trim();
                     
-                    if(checkin && checkout && cabin) {
-                        // Formatear fechas a un formato legible (DD/MM/YYYY) para el mensaje
+                    if(checkin && checkout && cabin && currentSummary) {
                         const formatForMsg = (dateStr) => {
                             const [year, month, day] = dateStr.split('-');
                             return `${day}/${month}/${year}`;
                         };
 
-                        let mensaje = `¡Hola! Me gustaría reservar en La Pajarera EcoHostal.%0A%0A*Refugio:* Cabaña ${cabin}%0A*Check-in:* ${formatForMsg(checkin)}%0A*Check-out:* ${formatForMsg(checkout)}`;
+                        let mensaje = `¡Hola! Me gustaría reservar en La Pajarera EcoHostal.%0A%0A`;
+                        mensaje += `*Refugio:* Cabaña ${cabin}%0A`;
+                        mensaje += `*Fechas:* ${formatForMsg(checkin)} al ${formatForMsg(checkout)}%0A%0A`;
                         
-                        if(promoCode) {
-                            mensaje += `%0A*Código de descuento:* ${promoCode.toUpperCase()}`;
+                        mensaje += `*--- RESUMEN ---*%0A`;
+                        if (currentSummary.weekdays > 0) {
+                            mensaje += `Noches L-J (${currentSummary.weekdays}): ${formatCurrency(currentSummary.costWeekdays)}%0A`;
+                        }
+                        if (currentSummary.weekends > 0) {
+                            mensaje += `Noches FDS/Festivos (${currentSummary.weekends}): ${formatCurrency(currentSummary.costWeekends)}%0A`;
+                        }
+                        mensaje += `*Subtotal:* ${formatCurrency(currentSummary.subtotal)}%0A`;
+                        
+                        if (currentSummary.isPromoValid) {
+                            mensaje += `*Descuento (${currentSummary.promo.toUpperCase()}):* -${formatCurrency(currentSummary.discount)}%0A`;
                         }
                         
-                        mensaje += `%0A%0A¿Me podrían confirmar disponibilidad y detalles, por favor?`;
+                        mensaje += `*Total Estimado:* ${formatCurrency(currentSummary.total)}%0A%0A`;
+                        mensaje += `¿Me podrían confirmar disponibilidad y detalles para realizar el abono, por favor?`;
                         
-                        // Abrir enlace de WhatsApp con el número ingresado
                         window.open(`https://wa.me/573182408981?text=${mensaje}`, '_blank');
                     }
                 });

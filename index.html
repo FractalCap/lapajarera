@@ -209,7 +209,7 @@
         <div class="absolute inset-0 bg-black/30 z-0 pointer-events-none"></div>
 
         <!-- Slide Indicators -->
-        <div class="absolute top-2 md:top-3 left-1/2 -translate-x-1/2 z-20 flex gap-2" id="slide-indicators"></div>
+        <div class="absolute top-2 md:top-3 left-1/2 -translate-x-1/2 z-20 flex gap-1 md:gap-2 max-w-[90vw]" id="slide-indicators"></div>
 
         <div class="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center fade-in opacity-0 translate-y-8 mt-12 md:mt-20">
             <img src="https://i.imgur.com/okUBI6k.jpeg" alt="La Pajarera EcoHostal Logo" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-xl mb-8 border border-white/20">
@@ -271,11 +271,16 @@
                 <!-- Video Vertical -->
                 <div class="fade-in opacity-0 translate-y-8 flex justify-center lg:justify-end relative">
                     <div class="absolute inset-0 bg-japandi-ochre/10 rounded-[2.5rem] blur-2xl transform translate-x-4 translate-y-4 -z-10 hidden lg:block"></div>
-                    <div class="relative w-full max-w-[320px] md:max-w-sm lg:max-w-md aspect-[9/16] rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-black/5 group">
-                        <video autoplay loop muted playsinline poster="f6.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+                    <div data-video-photos class="relative w-full max-w-[320px] md:max-w-sm lg:max-w-md aspect-[9/16] rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-black/5 group">
+                        <video autoplay muted playsinline poster="f11.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
                             <source src="video0.mp4" type="video/mp4">
                             <div class="w-full h-full bg-japandi-moss/50 flex items-center justify-center text-white p-6 text-center">Video no disponible</div>
                         </video>
+                        <!-- Fotos de la Cabaña A: aparecen cuando termina el video (ver 6.5 en el script) -->
+                        <img src="f11.jpg" alt="Cabaña A: fogata rodeada de bosque con vista al valle" loading="lazy" class="video-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-1000 group-hover:scale-105">
+                        <img src="f9.jpg" alt="Cabaña A: mecedora en el deck con vista al valle" loading="lazy" class="video-photo absolute inset-0 w-full h-full object-cover object-right opacity-0 transition-all duration-1000 group-hover:scale-105">
+                        <img src="f15.jpg" alt="Cabaña A: deck cubierto con mecedoras y vista a las montañas" loading="lazy" class="video-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-1000 group-hover:scale-105">
+                        <img src="f19.jpg" alt="Cabaña A: mecedoras en el deck junto al jacuzzi" loading="lazy" class="video-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-1000 group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none opacity-80"></div>
                         <div class="absolute bottom-8 left-8 right-8 text-white flex justify-between items-end pointer-events-none">
                             <div>
@@ -328,18 +333,24 @@
                 <div class="absolute w-full max-w-[340px] md:max-w-md aspect-[3/4] md:aspect-[4/5] bg-gradient-to-br from-white/70 to-white/10 backdrop-blur-lg border border-white/50 rounded-t-full rounded-b-[3rem] -z-10 transform -translate-x-4 md:-translate-x-8 translate-y-4 md:translate-y-8 shadow-[0_20px_40px_rgba(0,0,0,0.05)]"></div>
                 
                 <!-- Contenedor Principal en forma de arco -->
-                <div class="relative w-full max-w-[340px] md:max-w-md aspect-[3/4] md:aspect-[4/5] rounded-t-full rounded-b-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] border-[6px] border-white group">
-                    
-                    <video 
-                        autoplay 
-                        loop 
-                        muted 
-                        playsinline 
+                <div data-video-photos class="relative w-full max-w-[340px] md:max-w-md aspect-[3/4] md:aspect-[4/5] rounded-t-full rounded-b-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] border-[6px] border-white group">
+
+                    <video
+                        autoplay
+                        muted
+                        playsinline
+                        poster="f6.jpg"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
                     >
                         <source src="video1.mp4" type="video/mp4">
                         Tu navegador no soporta la etiqueta de video.
                     </video>
+
+                    <!-- Fotos de la Cabaña A: aparecen cuando termina el video (ver 6.5 en el script) -->
+                    <img src="f6.jpg" alt="Cabaña A: mesa en la terraza con vista al valle" loading="lazy" class="video-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-1000 group-hover:scale-105">
+                    <img src="f7.jpg" alt="Cabaña A: mesa en la terraza junto al jacuzzi" loading="lazy" class="video-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-1000 group-hover:scale-105">
+                    <img src="f14.jpg" alt="Cabaña A: terraza con mesa, jacuzzi y deck" loading="lazy" class="video-photo absolute inset-0 w-full h-full object-cover object-[25%_50%] opacity-0 transition-all duration-1000 group-hover:scale-105">
+                    <img src="f2.jpg" alt="Cabaña A: mesa en la terraza rodeada de jardín" loading="lazy" class="video-photo absolute inset-0 w-full h-full object-cover object-left opacity-0 transition-all duration-1000 group-hover:scale-105">
                     
                     <!-- Degradado sutil para asegurar contraste -->
                     <div class="absolute inset-0 bg-gradient-to-t from-japandi-dark/60 via-transparent to-transparent pointer-events-none opacity-80"></div>
@@ -382,7 +393,7 @@
                     <br><br>
                     Un espacio diseñado para reconectar con lo esencial a través de los sabores de la tierra. Bienvenidos todos.
                 </p>
-                
+
                 <a href="#" id="menu-whatsapp-btn" class="group inline-flex items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-japandi-dark hover:text-japandi-moss transition-colors duration-300">
                     <span class="border-b border-japandi-dark group-hover:border-japandi-moss pb-1 transition-colors duration-300">Descubrir el menú</span>
                     <div class="w-10 h-10 rounded-full border border-japandi-dark/20 flex items-center justify-center group-hover:border-japandi-moss group-hover:bg-japandi-moss group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-md">
@@ -474,11 +485,16 @@
                     <!-- Cristal esmerilado detrás del video (Efecto de profundidad Premium) -->
                     <div class="absolute w-full max-w-[300px] md:max-w-[340px] aspect-[9/16] bg-gradient-to-br from-japandi-moss/10 to-white/20 backdrop-blur-md rounded-[2.5rem] -z-10 transform translate-x-4 translate-y-4 md:translate-x-8 md:translate-y-8 border border-white/50 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)]"></div>
                     
-                    <div id="ritual-video-container" class="relative w-full max-w-[300px] md:max-w-[340px] aspect-[9/16] rounded-[2rem] overflow-hidden shadow-2xl border-[6px] border-white group cursor-pointer">
+                    <div id="ritual-video-container" data-video-photos class="relative w-full max-w-[300px] md:max-w-[340px] aspect-[9/16] rounded-[2rem] overflow-hidden shadow-2xl border-[6px] border-white group cursor-pointer">
                         <!-- Video de Restauración (Fixed tags) -->
-                        <video id="ritual-video" autoplay loop muted playsinline poster="https://i.imgur.com/KNAsXEA.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105">
+                        <video id="ritual-video" autoplay muted playsinline poster="f23.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105">
                             <source src="video2.mp4" type="video/mp4">
                         </video>
+                        <!-- Fotos de la Cabaña A: aparecen cuando termina el video (ver 6.5 en el script) -->
+                        <img src="f23.jpg" alt="Cabaña A: cama con muro de piedra y mesa de noche" loading="lazy" class="video-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-1000 group-hover:scale-105">
+                        <img src="f17.jpg" alt="Cabaña A: cama frente a los ventanales" loading="lazy" class="video-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-1000 group-hover:scale-105">
+                        <img src="f10.jpg" alt="Cabaña A: habitación con techo de madera y cortinas" loading="lazy" class="video-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-1000 group-hover:scale-105">
+                        <img src="f21.jpg" alt="Cabaña A: jacuzzi privado junto al deck" loading="lazy" class="video-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-1000 group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-japandi-dark/60 via-transparent to-transparent opacity-80 pointer-events-none"></div>
                         <div class="absolute bottom-6 right-6 z-20">
                             <div class="bg-white/95 backdrop-blur-md px-4 py-2 rounded-full border border-japandi-dark/5 shadow-lg flex items-center gap-2 transition-transform duration-300 group-hover:scale-105">
@@ -524,7 +540,7 @@
                 <div class="bg-white/80 backdrop-blur-md rounded-[2rem] overflow-hidden shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border border-white transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12)] hover:-translate-y-1 fade-in opacity-0 translate-y-8">
                     <!-- Carousel Container -->
                     <div class="h-64 md:h-72 relative cabin-carousel-container group bg-japandi-dark">
-                        <!-- Items: 26 Images (fotos locales de la nueva Cabaña A, f1 a f26) -->
+                        <!-- Items: 5 Images -->
                         <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-100 z-10">
                             <img src="f1.jpg" alt="Cabaña A: jacuzzi privado, terraza de piedra y deck con vista al valle" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
                         </div>
@@ -538,70 +554,7 @@
                             <img src="f12.jpg" alt="Cabaña A: terraza cubierta junto al jacuzzi" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
                         </div>
                         <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f17.jpg" alt="Cabaña A: cama frente a los ventanales" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f21.jpg" alt="Cabaña A: jacuzzi privado junto al deck" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f5.jpg" alt="Cabaña A: mesa en la terraza con vista al valle" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f4.jpg" alt="Cabaña A: vista desde la habitación hacia la terraza" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f18.jpg" alt="Cabaña A: habitación con cortinas y mesa de noche" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f19.jpg" alt="Cabaña A: mecedoras en el deck junto al jacuzzi" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f2.jpg" alt="Cabaña A: terraza de piedra rodeada de jardín" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
                             <img src="f3.jpg" alt="Cabaña A: fogata en el patio de piedra" loading="lazy" class="w-full h-full object-cover object-bottom transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f14.jpg" alt="Cabaña A: terraza, jacuzzi y deck con vista a las montañas" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f22.jpg" alt="Cabaña A: habitación amplia con muro de piedra" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f9.jpg" alt="Cabaña A: mecedora en el deck con vista al valle" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f13.jpg" alt="Cabaña A: cama con vista a las montañas" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f7.jpg" alt="Cabaña A: jacuzzi y mesa en la terraza de piedra" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f10.jpg" alt="Cabaña A: habitación con techo de madera y cortinas" loading="lazy" class="w-full h-full object-cover object-[50%_75%] transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f15.jpg" alt="Cabaña A: deck cubierto con mecedoras" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f23.jpg" alt="Cabaña A: cama con muro de piedra y mesa de noche" loading="lazy" class="w-full h-full object-cover object-[50%_75%] transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f25.jpg" alt="Cabaña A: jacuzzi frente al deck con mecedora" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f26.jpg" alt="Cabaña A: habitación con ventanales al paisaje" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f8.jpg" alt="Cabaña A: jacuzzi, terraza y salida de la habitación" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f16.jpg" alt="Cabaña A: habitación con salida a la terraza" loading="lazy" class="w-full h-full object-cover object-[50%_75%] transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f6.jpg" alt="Cabaña A: terraza cubierta con vista al valle" loading="lazy" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110">
-                        </div>
-                        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
-                            <img src="f11.jpg" alt="Cabaña A: fogata rodeada de bosque" loading="lazy" class="w-full h-full object-cover object-bottom transition-transform duration-[1.5s] group-hover:scale-110">
                         </div>
                         
                         <!-- Dots Container -->
@@ -1432,16 +1385,26 @@
             }, 3000);
 
             // --- 0. Lógica del Slideshow del Hero ---
+            // Fotos de la Cabaña A intercaladas con las de las Cabañas B y C (imgur)
             const heroImages = [
                 "f1.jpg",
                 "f24.jpg",
                 "f20.jpg",
                 "f12.jpg",
                 "https://i.imgur.com/kUgBNcX.jpeg",
+                "f13.jpg",
+                "f5.jpg",
+                "f22.jpg",
                 "https://i.imgur.com/4EXasXl.jpeg",
-                "https://i.imgur.com/6cMz8JF.jpeg",
+                "f18.jpg",
+                "f25.jpg",
                 "https://i.imgur.com/KNAsXEA.jpeg",
+                "f8.jpg",
+                "f26.jpg",
+                "https://i.imgur.com/6cMz8JF.jpeg",
+                "f16.jpg",
                 "https://i.imgur.com/etA6Yyo.jpeg",
+                "f4.jpg",
                 "https://i.imgur.com/WimX03n.jpeg"
             ];
 
@@ -1451,7 +1414,12 @@
 
             heroImages.forEach((imgSrc, index) => {
                 const img = document.createElement('img');
-                img.src = imgSrc;
+                // Solo las 2 primeras cargan de entrada; las demás se cargan justo antes de mostrarse (ver loadSlide)
+                if (index < 2) {
+                    img.src = imgSrc;
+                } else {
+                    img.dataset.src = imgSrc;
+                }
                 img.alt = `Slideshow image ${index + 1}`;
                 img.className = `absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === 0 ? 'opacity-100 animate-slow-pan' : 'opacity-0'}`;
                 img.id = `slide-img-${index}`;
@@ -1470,6 +1438,14 @@
                 indicatorsContainer.appendChild(indicator);
             });
 
+            function loadSlide(index) {
+                const img = document.getElementById(`slide-img-${index}`);
+                if (img && img.dataset.src) {
+                    img.src = img.dataset.src;
+                    delete img.dataset.src;
+                }
+            }
+
             function changeSlide(nextIndex) {
                 const currentImg = document.getElementById(`slide-img-${currentSlide}`);
                 const currentDot = document.getElementById(`slide-dot-${currentSlide}`);
@@ -1481,6 +1457,8 @@
                 currentDot.classList.add('bg-white/30');
 
                 currentSlide = nextIndex;
+                loadSlide(currentSlide); // por si se saltó a esta foto con un indicador
+                loadSlide((currentSlide + 1) % heroImages.length); // dejar lista la siguiente
                 const nextImg = document.getElementById(`slide-img-${currentSlide}`);
                 const nextDot = document.getElementById(`slide-dot-${currentSlide}`);
 
@@ -1661,7 +1639,66 @@
                 });
             }
 
-            // 7. Lógica de Carrusel de Cabañas (cambia de imagen cada 15s)
+            // 6.5 Fotos después de cada video (Cómo llegar, Gastronomía y Cómo reservar)
+            // Cada marco reproduce su video y, cuando termina, muestra sus fotos en el mismo lugar; luego vuelve al video.
+            // Si el video no está disponible, el marco muestra solo las fotos.
+            const VIDEO_PHOTO_DURATION = 4000;
+
+            document.querySelectorAll('[data-video-photos]').forEach((frame) => {
+                const video = frame.querySelector('video');
+                const source = video.querySelector('source');
+                const photos = frame.querySelectorAll('.video-photo');
+                let current = -1; // -1 = video; 0, 1, 2... = foto
+                let timer = null;
+                let started = false;
+                let videoAvailable = true;
+
+                const show = (index) => {
+                    photos.forEach((photo, i) => {
+                        photo.classList.toggle('opacity-100', i === index);
+                        photo.classList.toggle('opacity-0', i !== index);
+                    });
+                    current = index;
+                };
+
+                const nextPhoto = () => {
+                    clearTimeout(timer);
+                    if (current + 1 >= photos.length && videoAvailable) {
+                        playVideo();
+                        return;
+                    }
+                    show((current + 1) % photos.length);
+                    timer = setTimeout(nextPhoto, VIDEO_PHOTO_DURATION);
+                };
+
+                const fallbackToPhotos = () => {
+                    if (!videoAvailable) return;
+                    videoAvailable = false;
+                    if (started && current === -1) nextPhoto();
+                };
+
+                const playVideo = () => {
+                    show(-1);
+                    video.currentTime = 0;
+                    video.play().catch(fallbackToPhotos);
+                };
+
+                video.addEventListener('ended', () => {
+                    if (started) nextPhoto();
+                });
+                if (source) source.addEventListener('error', fallbackToPhotos);
+
+                // Empezar cuando el marco aparece en pantalla, para que el video siempre se vea primero
+                const frameObserver = new IntersectionObserver((entries) => {
+                    if (!entries[0].isIntersecting) return;
+                    frameObserver.disconnect();
+                    started = true;
+                    if (videoAvailable) playVideo(); else nextPhoto();
+                }, { threshold: 0.3 });
+                frameObserver.observe(frame);
+            });
+
+            // 7. Lógica de Carrusel de Cabañas (5 Imágenes cada 15s)
             const cabinCarousels = document.querySelectorAll('.cabin-carousel-container');
 
             cabinCarousels.forEach((carousel) => {
@@ -1683,11 +1720,6 @@
                     });
                     dotsContainer.appendChild(dot);
                 });
-
-                // Con muchas fotos (Cabaña A tiene 26) se juntan los puntos para que quepan en celulares angostos
-                if (items.length > 12) {
-                    dotsContainer.classList.replace('gap-1.5', 'gap-1');
-                }
 
                 const dots = dotsContainer.querySelectorAll('button');
 
